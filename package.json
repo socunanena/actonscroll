@@ -5,5 +5,15 @@
   "main": "index.js",
   "author": "Natàlia <natalia.cavi@gmail.com>",
   "license": "Apache-2.0",
-  "repository": "github:socunanena/scroll-event"
+  "repository": "github:socunanena/scroll-event",
+  "scripts": {
+    "build": "rm -rf lib && babel src -d lib --source-maps"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-modules-umd": "^7.1.0",
+    "@babel/preset-env": "^7.1.0"
+  },
+  "dependencies": {}
 }
