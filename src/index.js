@@ -5,7 +5,9 @@ function noActionWarning() {
 }
 
 function getVerticalOffset(container) {
-  return document.body.getBoundingClientRect().top;
+  const content = container === document ? document.body : container.firstElementChild;
+
+  return content.getBoundingClientRect().top;
 }
 
 class ScrollEvent {
@@ -15,7 +17,7 @@ class ScrollEvent {
 
   _init() {
     this
-      .container(window)
+      .container(document)
       .action(noActionWarning)
       .condition(() => true)
       .throttling(200)
@@ -70,7 +72,6 @@ class ScrollEvent {
   listen() {
     const executeAction = () => {
       if (this._isDirectionAllowed()) {
-        console.log('direction allowed!');
         const success = this._condition();
         if (success) {
           this._action(success);
