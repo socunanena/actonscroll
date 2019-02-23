@@ -4,6 +4,12 @@ function noActionWarning() {
   console.warn('[Scroll Event] No action implemented on user scroll');
 }
 
+function getVerticalOffset(container) {
+  const content = container === document ? document.body : container.firstElementChild;
+
+  return content.getBoundingClientRect().top;
+}
+
 class ScrollEvent {
   constructor() {
     this._init();
@@ -11,11 +17,14 @@ class ScrollEvent {
 
   _init() {
     this
-      .container(window)
+      .container(document)
       .action(noActionWarning)
       .condition(() => true)
       .throttling(200)
+      .direction('both')
       .once(false);
+
+    this._scrollOffset = getVerticalOffset(this._container);
   }
 
   container(container) {
@@ -42,6 +51,18 @@ class ScrollEvent {
     return this;
   }
 
+  direction(direction) {
+    const directions = {
+      'up': [1],
+      'down': [-1],
+      'both': [1, -1],
+    };
+
+    this._direction = directions[direction];
+
+    return this;
+  }
+
   once(once = true) {
     this._once = once;
 
@@ -50,12 +71,14 @@ class ScrollEvent {
 
   listen() {
     const executeAction = () => {
-      const success = this._condition();
-      if (success) {
-        this._action(success);
+      if (this._isDirectionAllowed()) {
+        const success = this._condition();
+        if (success) {
+          this._action(success);
 
-        if (this._once) {
-          this._stop();
+          if (this._once) {
+            this._stop();
+          }
         }
       }
     };
@@ -63,6 +86,14 @@ class ScrollEvent {
     this._throttledExecution = throttle(executeAction, this._throttling);
 
     this._start();
+  }
+
+  _isDirectionAllowed() {
+    const currentScrollOffset = getVerticalOffset(this._container);
+    const offsetDiff = currentScrollOffset - this._scrollOffset;
+    this._scrollOffset = currentScrollOffset;
+
+    return this._direction.some(direction => offsetDiff / direction > 0);
   }
 
   revoke() {
