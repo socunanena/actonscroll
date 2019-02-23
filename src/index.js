@@ -109,4 +109,6 @@ class ScrollEvent {
   }
 }
 
-export default new ScrollEvent();
+export default {
+  create: () => new ScrollEvent(),
+};
