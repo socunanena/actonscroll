@@ -59,16 +59,19 @@ class ScrollListener {
    * @example
    * scrollListener.conditions({
    *   direction: 'up',
+   *   offset: 200,
    *   custom: () => true,
    * });
    *
    * @param {Object} conditions
    * @param {string} conditions.direction Allowed values: <code>'up'</code>, <code>'down'</code>.
+   * @param {number} conditions.offset In pixels.
    * @param {Function} conditions.custom
    * @returns {ScrollListener}
    */
-  conditions({ direction, custom }) {
+  conditions({ direction, offset, custom }) {
     ['up', 'down'].includes(direction) && this._conditions.push(() => this._direction(direction));
+    offset > 0 && this._conditions.push(() => this._offset(offset));
     custom && this._conditions.push(custom);
 
     return this;
@@ -82,6 +85,12 @@ class ScrollListener {
     this._scrollOffset = currentScrollOffset;
 
     return offsetDiff / directions[direction] > 0;
+  }
+
+  _offset(offset) {
+    const currentScrollOffset = (this._container.body || this._container).scrollTop;
+
+    return offset < currentScrollOffset;
   }
 
   /**

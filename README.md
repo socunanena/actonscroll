@@ -99,12 +99,14 @@ Sets a list of conditions to determine whether the configured action has to be p
 | --- | --- | --- |
 | conditions | <code>Object</code> |  |
 | conditions.direction | <code>string</code> | Allowed values: <code>'up'</code>, <code>'down'</code>. |
-| conditions.custom | <code>Function</code> |  |
+| conditions.offset | <code>number</code> | In pixels. |
+| conditions.custom | <code>function</code> |  |
 
 **Example**
 ```js
 scrollListener.conditions({
   direction: 'up',
+  offset: 200,
   custom: () => true,
 });
 ```
