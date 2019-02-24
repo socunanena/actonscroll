@@ -52,8 +52,7 @@ Executes a predefined action when the scroll event is triggered.
 * [ScrollListener](#ScrollListener)
     * [.container(container)](#ScrollListener+container) ⇒ [<code>ScrollListener</code>](#ScrollListener)
     * [.action(action)](#ScrollListener+action) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-    * [.condition(condition)](#ScrollListener+condition) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-    * [.direction(direction)](#ScrollListener+direction) ⇒ [<code>ScrollListener</code>](#ScrollListener)
+    * [.conditions(conditions)](#ScrollListener+conditions) ⇒ [<code>ScrollListener</code>](#ScrollListener)
     * [.throttling(throttling)](#ScrollListener+throttling) ⇒ [<code>ScrollListener</code>](#ScrollListener)
     * [.once([once])](#ScrollListener+once) ⇒ [<code>ScrollListener</code>](#ScrollListener)
     * [.listen()](#ScrollListener+listen)
@@ -89,35 +88,25 @@ Sets an action to be performed when the scroll event is triggered.
 ```js
 scrollListener.action(() => console.log('Scrooolling!'));
 ```
-<a name="ScrollListener+condition"></a>
+<a name="ScrollListener+conditions"></a>
 
-### scrollListener.condition(condition) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-Sets a condition to determine whether the configured action has to be performed or not.
-
-**Kind**: instance method of [<code>ScrollListener</code>](#ScrollListener)
-
-| Param | Type |
-| --- | --- |
-| condition | <code>function</code> |
-
-**Example**
-```js
-scrollListener.condition(() => document.querySelector('.my-container').scrollTop > 800);
-```
-<a name="ScrollListener+direction"></a>
-
-### scrollListener.direction(direction) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-Sets the direction of the scroll to listen to.
+### scrollListener.conditions(conditions) ⇒ [<code>ScrollListener</code>](#ScrollListener)
+Sets a list of conditions to determine whether the configured action has to be performed or not.
 
 **Kind**: instance method of [<code>ScrollListener</code>](#ScrollListener)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| direction | <code>string</code> | Allowed values: <code>'up'</code>, <code>'down'</code>, <code>'both'</code>. |
+| conditions | <code>Object</code> |  |
+| conditions.direction | <code>string</code> | Allowed values: <code>'up'</code>, <code>'down'</code>. |
+| conditions.custom | <code>Function</code> |  |
 
 **Example**
 ```js
-scrollListener.direction('up');
+scrollListener.conditions({
+  direction: 'up',
+  custom: () => true,
+});
 ```
 <a name="ScrollListener+throttling"></a>
 
@@ -169,4 +158,3 @@ Removes the listener from the configured container.
 ```js
 scrollListener.revoke();
 ```
-

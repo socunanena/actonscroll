@@ -16,11 +16,10 @@ class ScrollListener {
     this
       .container(document)
       .action(noActionWarning)
-      .condition(() => true)
-      .direction('both')
       .throttling(200)
       .once(false);
 
+    this._conditions = [];
     this._scrollOffset = document.body.scrollTop;
   }
 
@@ -55,39 +54,34 @@ class ScrollListener {
   }
 
   /**
-   * Sets a condition to determine whether the configured action has to be performed or not.
+   * Sets a list of conditions to determine whether the configured action has to be performed or not.
    *
    * @example
-   * scrollListener.condition(() => document.querySelector('.my-container').scrollTop > 800);
+   * scrollListener.conditions({
+   *   direction: 'up',
+   *   custom: () => true,
+   * });
    *
-   * @param {Function} condition
+   * @param {Object} conditions
+   * @param {string} conditions.direction Allowed values: <code>'up'</code>, <code>'down'</code>.
+   * @param {Function} conditions.custom
    * @returns {ScrollListener}
    */
-  condition(condition) {
-    this._condition = condition;
+  conditions({ direction, custom }) {
+    ['up', 'down'].includes(direction) && this._conditions.push(() => this._direction(direction));
+    custom && this._conditions.push(custom);
 
     return this;
   }
 
-  /**
-   * Sets the direction of the scroll to listen to.
-   *
-   * @example
-   * scrollListener.direction('up');
-   *
-   * @param {string} direction ['up', 'down', 'both']
-   * @returns {ScrollListener}
-   */
-  direction(direction) {
-    const directions = {
-      'up': [1],
-      'down': [-1],
-      'both': [1, -1],
-    };
+  _direction(direction) {
+    const directions = { 'up': 1, 'down': -1 };
 
-    this._direction = directions[direction] || directions['both'];
+    const currentScrollOffset = (this._container.body || this._container).scrollTop;
+    const offsetDiff = currentScrollOffset - this._scrollOffset;
+    this._scrollOffset = currentScrollOffset;
 
-    return this;
+    return offsetDiff / directions[direction] > 0;
   }
 
   /**
@@ -128,14 +122,12 @@ class ScrollListener {
    */
   listen() {
     const executeAction = () => {
-      if (this._isDirectionAllowed()) {
-        const success = this._condition();
-        if (success) {
-          this._action(success);
+      const success = this._checkConditions();
+      if (success) {
+        this._action(success);
 
-          if (this._once) {
-            this._stop();
-          }
+        if (this._once) {
+          this._stop();
         }
       }
     };
@@ -145,12 +137,8 @@ class ScrollListener {
     this._start();
   }
 
-  _isDirectionAllowed() {
-    const currentScrollOffset = (this._container.body || this._container).scrollTop;
-    const offsetDiff = currentScrollOffset - this._scrollOffset;
-    this._scrollOffset = currentScrollOffset;
-
-    return this._direction.some(direction => offsetDiff / direction > 0);
+  _checkConditions() {
+    return this._conditions.reduce((success, condition) => success && condition(), true);
   }
 
   /**
