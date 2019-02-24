@@ -91,7 +91,7 @@ class ScrollListener {
       'both': [1, -1],
     };
 
-    this._direction = directions[direction];
+    this._direction = directions[direction] || directions['both'];
 
     return this;
   }
