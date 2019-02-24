@@ -1,7 +1,7 @@
 import throttle from 'lodash/throttle';
 
 function noActionWarning() {
-  console.warn('[Scroll Event] No action implemented on user scroll');
+  console.warn('[Scroll Listener] No action implemented on user scroll');
 }
 
 function getVerticalOffset(container) {
@@ -10,7 +10,7 @@ function getVerticalOffset(container) {
   return content.getBoundingClientRect().top;
 }
 
-class ScrollEvent {
+class ScrollListener {
   constructor() {
     this._init();
   }
@@ -20,8 +20,8 @@ class ScrollEvent {
       .container(document)
       .action(noActionWarning)
       .condition(() => true)
-      .throttling(200)
       .direction('both')
+      .throttling(200)
       .once(false);
 
     this._scrollOffset = getVerticalOffset(this._container);
@@ -45,12 +45,6 @@ class ScrollEvent {
     return this;
   }
 
-  throttling(throttling) {
-    this._throttling = throttling;
-
-    return this;
-  }
-
   direction(direction) {
     const directions = {
       'up': [1],
@@ -59,6 +53,12 @@ class ScrollEvent {
     };
 
     this._direction = directions[direction];
+
+    return this;
+  }
+
+  throttling(throttling) {
+    this._throttling = throttling;
 
     return this;
   }
@@ -110,5 +110,5 @@ class ScrollEvent {
 }
 
 export default {
-  create: () => new ScrollEvent(),
+  create: () => new ScrollListener(),
 };

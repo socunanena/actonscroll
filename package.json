@@ -1,11 +1,11 @@
 {
-  "name": "scroll-event",
+  "name": "actonscroll",
   "version": "0.1.0",
-  "description": "Tool to perform an action when user scrolls in a web page",
+  "description": "Tool to perform an action when a user scrolls in a web page.",
   "main": "src/index.js",
   "author": "Natàlia <natalia.cavi@gmail.com>",
   "license": "Apache-2.0",
-  "repository": "github:socunanena/scroll-event",
+  "repository": "github:socunanena/actonscroll",
   "scripts": {
     "build": "rm -rf lib && babel src -d lib --source-maps"
   },
