@@ -7,7 +7,8 @@
   "license": "Apache-2.0",
   "repository": "github:socunanena/actonscroll",
   "scripts": {
-    "build": "rm -rf lib && babel src -d lib --source-maps"
+    "build": "webpack",
+    "dev": "webpack --watch"
   },
   "devDependencies": {
     "webpack": "^4.29.5",
