@@ -4,12 +4,6 @@ function noActionWarning() {
   console.warn('[Scroll Listener] No action implemented on user scroll');
 }
 
-function getVerticalOffset(container) {
-  const content = container === document ? document.body : container.firstElementChild;
-
-  return content.getBoundingClientRect().top;
-}
-
 /**
  * Executes a predefined action when the scroll event is triggered.
  */
@@ -27,7 +21,7 @@ class ScrollListener {
       .throttling(200)
       .once(false);
 
-    this._scrollOffset = getVerticalOffset(this._container);
+    this._scrollOffset = document.body.scrollTop;
   }
 
   /**
@@ -152,7 +146,7 @@ class ScrollListener {
   }
 
   _isDirectionAllowed() {
-    const currentScrollOffset = getVerticalOffset(this._container);
+    const currentScrollOffset = (this._container.body || this._container).scrollTop;
     const offsetDiff = currentScrollOffset - this._scrollOffset;
     this._scrollOffset = currentScrollOffset;
 
