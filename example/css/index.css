@@ -1,0 +1,45 @@
+body, p {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+}
+
+section {
+  width: 600px;
+  margin: auto;
+  padding: 10px;
+  background-color: aqua;
+}
+
+article {
+  display: table;
+  width: 100%;
+  margin: 10px 0;
+  background-color: lightblue;
+}
+
+article header {
+  padding: 5px 10px;
+  background-color: lightseagreen;
+}
+
+.container {
+  float: left;
+  display: table-row;
+  margin: 10px;
+  width: 60%;
+  height: 200px;
+  overflow: auto;
+}
+
+.result {
+  display: none;
+  overflow: hidden;
+  margin: 10px;
+  background-color: gold;
+}
+
+footer {
+}
