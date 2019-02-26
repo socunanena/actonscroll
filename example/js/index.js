@@ -1,20 +1,26 @@
 import scrollEvent from '../../src/index';
 
-function createListener(exampleClass) {
-  const action = () => {
-    const elementStyle = document.querySelector(`.${exampleClass} .result`).style;
+function generateAction(resultContainer, displayMode) {
+  return () => {
+    const elementStyle = document.querySelector(resultContainer).style;
 
-    elementStyle.display = 'block';
+    elementStyle.display = displayMode;
 
     setTimeout(() => elementStyle.display = 'none', 200);
   };
+}
 
+function createListener(exampleClass) {
   return scrollEvent.create()
     .container(document.querySelector(`.${exampleClass} .container`))
-    .action(action);
+    .action(generateAction(`.${exampleClass} .result`, 'block'));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  scrollEvent.create()
+    .action(generateAction('footer .result', 'table-cell'))
+    .listen();
+
   createListener('example-condition-direction')
     .conditions({ direction: 'up' })
     .listen();

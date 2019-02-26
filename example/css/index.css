@@ -42,4 +42,17 @@ article header {
 }
 
 footer {
+  display: table;
+  width:100%;
+  height:50px;
+  background: black;
+  color: white;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+}
+
+footer .result {
+  display: none;
+  vertical-align: middle;
 }
