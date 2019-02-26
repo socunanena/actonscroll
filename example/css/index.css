@@ -34,10 +34,13 @@ article header {
   overflow: auto;
 }
 
-.result {
-  display: none;
+.options {
   overflow: hidden;
   margin: 10px;
+}
+
+.result {
+  display: none;
   background-color: gold;
 }
 
