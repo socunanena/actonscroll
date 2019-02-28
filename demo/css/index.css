@@ -51,17 +51,23 @@ article > div {
   padding: 0 0 0 10px;
 }
 
+.description {
+  margin-bottom: 20px;
+}
+
 .result {
   display: none;
-  background-color: gold;
+  padding: 5px;
+  text-align: center;
+  background-color: #448af3;
+  border-radius: 10px 30px;
+  border: solid 2px #0b3678;
+  color: #0b3678;
+  font-weight: bold;
 }
 
 .notification {
-  display: none;
-  text-align: center;
   position: sticky;
-  bottom: 50%;
+  bottom: 20%;
   padding: 20px;
-  background-color: #448af3;
-  box-shadow: 0 0 10px 0 #00000099;
 }
