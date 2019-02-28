@@ -1,10 +1,10 @@
 import scrollEvent from '../../src/index';
 
-function generateAction(resultContainer, displayMode) {
+function generateAction(resultContainer) {
   return () => {
     const elementStyle = document.querySelector(resultContainer).style;
 
-    elementStyle.display = displayMode;
+    elementStyle.display = 'block';
 
     setTimeout(() => elementStyle.display = 'none', 200);
   };
@@ -13,12 +13,12 @@ function generateAction(resultContainer, displayMode) {
 function createListener(exampleClass) {
   return scrollEvent.create()
     .container(document.querySelector(`.${exampleClass} .container`))
-    .action(generateAction(`.${exampleClass} .result`, 'block'));
+    .action(generateAction(`.${exampleClass} .result`));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   scrollEvent.create()
-    .action(generateAction('footer .result', 'table-cell'))
+    .action(generateAction('.notification'))
     .listen();
 
   createListener('example-condition-direction')
