@@ -22,21 +22,33 @@ article {
   padding: 20px;
   background-color: #a8d2a5;
   border-radius: 10px 10px 100px 10px;
-  box-shadow: 0 0 7px 0px #00000052;
+  box-shadow: 0 0 7px 0 #00000052;
+}
+
+article > div {
+  margin: 20px 0 0;
 }
 
 .container {
   float: left;
   display: table-row;
-  margin: 10px 0;
   width: 60%;
   height: 200px;
   overflow: auto;
+  padding: 4px 7px;
+  background-color: #bce0ba;
+  border-radius: 5px;
+  border: #81a97f 1px solid;
+  box-shadow: inset 0 0 3px #81a97f;
+}
+
+.container::-webkit-scrollbar {
+  width: 0;
 }
 
 .options {
   overflow: hidden;
-  padding: 10px 0 10px 10px;
+  padding: 0 0 0 10px;
 }
 
 .result {
@@ -51,5 +63,5 @@ article {
   bottom: 50%;
   padding: 20px;
   background-color: #448af3;
-  box-shadow: 0 0 10px 0px #00000099;
+  box-shadow: 0 0 10px 0 #00000099;
 }
