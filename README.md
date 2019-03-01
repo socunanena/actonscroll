@@ -163,7 +163,7 @@ scrollListener.revoke();
 
 # Demo
 
-In order to see the above commands in action there's a basic demo with a few examples to demonstrate how it works. You can find it into the <code>/demo</code> folder. You just need to run the next commands:
+In order to see this tool in action there's a basic demo with a few examples to demonstrate how it works. You can find it into the <code>/demo</code> folder. You just need to run the next commands:
 
 ## On Mac
 ```bash
