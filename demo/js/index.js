@@ -1,4 +1,4 @@
-import scrollEvent from '../../src/index';
+import actonscroll from '../../src/index';
 
 function generateAction(resultContainer) {
   return () => {
@@ -11,13 +11,13 @@ function generateAction(resultContainer) {
 }
 
 function createListener(exampleClass) {
-  return scrollEvent.create()
+  return actonscroll.create()
     .container(document.querySelector(`.${exampleClass} .container`))
     .action(generateAction(`.${exampleClass} .result`));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  scrollEvent.create()
+  actonscroll.create()
     .action(generateAction('.notification'))
     .listen();
 
