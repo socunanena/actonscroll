@@ -1,6 +1,7 @@
 body {
-  background-color: #eaeaea;
+  background-color: #dce0dc;
   font-family: 'Lato', sans-serif;
+  color: #263326;
 }
 
 body, p, h1, h2, h3, h4, h5, h6 {
@@ -11,35 +12,49 @@ body, p, h1, h2, h3, h4, h5, h6 {
 section {
   width: 700px;
   margin: auto;
-  padding: 10px 50px;
-  background-color: #fdfdfd;
+  padding: 30px 50px;
   box-shadow: 0 0 50px -10px;
+  background-color: #f6f9f7;
+}
+
+section > header {
+  font-size: 3em;
+  font-weight: bold;
 }
 
 article {
   display: table;
   margin: 20px 0;
   padding: 20px;
-  background-color: #a8d2a5;
   border-radius: 10px 10px 100px 10px;
   box-shadow: 0 0 7px 0 #00000052;
+  background-color: #b7bfb7; /* a8d2a5 */
+}
+
+article:last-child {
+  margin-bottom: 0;
+}
+
+article > header {
+  font-size: 1.5em;
 }
 
 article > div {
-  margin: 20px 0 0;
+  margin: 13px 0 0;
 }
 
 .container {
   float: left;
   display: table-row;
-  width: 60%;
-  height: 200px;
   overflow: auto;
   padding: 4px 7px;
-  background-color: #bce0ba;
+  width: 60%;
+  height: 200px;
   border-radius: 5px;
   border: #81a97f 1px solid;
   box-shadow: inset 0 0 3px #81a97f;
+  background-color: #bce0ba;
+  font-weight: 300;
 }
 
 .container::-webkit-scrollbar {
@@ -48,7 +63,7 @@ article > div {
 
 .options {
   overflow: hidden;
-  padding: 0 0 0 10px;
+  padding-left: 20px;
 }
 
 .description {
@@ -57,17 +72,22 @@ article > div {
 
 .result {
   display: none;
-  padding: 5px;
-  text-align: center;
-  background-color: #448af3;
+  border: solid 2px #634603;
   border-radius: 10px 30px;
-  border: solid 2px #0b3678;
-  color: #0b3678;
+  background-color: #ffba17;
+  color: #634603;
+  text-align: center;
   font-weight: bold;
 }
 
-.notification {
+.result-element {
+  padding: 12px;
+  font-size: 1.2em;
+}
+
+.result-body {
   position: sticky;
   bottom: 20%;
-  padding: 20px;
+  padding: 15px;
+  font-size: 1.6em;
 }
