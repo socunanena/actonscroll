@@ -1,4 +1,4 @@
-import * as lodash from 'lodash.throttle';
+import throttle from 'lodash.throttle';
 import actonscroll from '../src/index';
 
 describe('actonscroll', () => {
@@ -184,13 +184,13 @@ describe('actonscroll', () => {
 
       describe('when throttling is set', () => {
         it('should call lodash function: throttle', () => {
-          const throttle = jest.spyOn(lodash, 'default');
+          const throttling = 200;
 
           eventListener
-            .throttling(200)
+            .throttling(throttling)
             .listen();
 
-          expect(throttle).toHaveBeenCalledWith(expect.anything(), 200);
+          expect(throttle).toHaveBeenCalledWith(expect.anything(), throttling);
         });
       });
 
