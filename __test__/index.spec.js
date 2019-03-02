@@ -76,7 +76,14 @@ describe('actonscroll', () => {
       describe('when direction condition is configured', () => {
         describe('and bad direction is passed', () => {
           it('should not check for the direction condition', () => {
+            eventListener
+              .conditions({ direction: 'bad-direction' })
+              .action(action)
+              .listen();
 
+            document.dispatchEvent(scrollEvent);
+
+            expect(action).toHaveBeenCalledWith(true);
           });
         });
 
@@ -114,7 +121,14 @@ describe('actonscroll', () => {
       describe('when offset condition is configured', () => {
         describe('and bad offset is passed', () => {
           it('should not check for the offset condition', () => {
+            eventListener
+              .conditions({ offset: -1 })
+              .action(action)
+              .listen();
 
+            document.dispatchEvent(scrollEvent);
+
+            expect(action).toHaveBeenCalledWith(true);
           });
         });
 
