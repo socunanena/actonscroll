@@ -8,13 +8,18 @@
   "repository": "github:socunanena/actonscroll",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack --watch"
+    "dev": "webpack --watch",
+    "test": "jest",
+    "tdd": "jest --watch"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.3.4",
+    "babel-jest": "^24.1.0",
+    "jest": "^24.1.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "lodash.throttle": "^4.1.1"
   }
 }
