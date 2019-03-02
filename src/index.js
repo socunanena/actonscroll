@@ -1,4 +1,4 @@
-import throttle from 'lodash/throttle';
+import throttle from 'lodash.throttle';
 
 function noActionWarning() {
   console.warn('[Scroll Listener] No action implemented on user scroll');

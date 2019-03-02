@@ -1,3 +1,4 @@
+import * as lodash from 'lodash.throttle';
 import actonscroll from '../src/index';
 
 describe('actonscroll', () => {
@@ -181,14 +182,17 @@ describe('actonscroll', () => {
         });
       });
 
-      // import throttle from 'lodash/throttle';
-      // jest.mock('lodash/throttle');
+      describe('when throttling is set', () => {
+        it('should call lodash function: throttle', () => {
+          const throttle = jest.spyOn(lodash, 'default');
 
+          eventListener
+            .throttling(200)
+            .listen();
 
-      // import HttpService from '../../services/httpService';
-      // jest.mock('../../services/httpService', ()=>({
-      //   post: jest.fn()
-      // });
+          expect(throttle).toHaveBeenCalledWith(expect.anything(), 200);
+        });
+      });
 
       describe('when once is false', () => {
         it('should trigger the action as many times as scroll is dispatched', () => {
