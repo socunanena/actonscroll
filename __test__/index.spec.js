@@ -27,6 +27,7 @@ describe('actonscroll', () => {
 
     const scrollEvent = new Event('scroll');
     const action = jest.fn();
+    const initialScrollPosition = 10;
     let eventListener;
 
     it('should be an instance of ScrollListener', () => {
@@ -42,6 +43,7 @@ describe('actonscroll', () => {
     });
 
     beforeEach(() => {
+      document.body.scrollTop = initialScrollPosition;
       eventListener = actonscroll.create().throttling(10);
     });
 
@@ -97,16 +99,13 @@ describe('actonscroll', () => {
 
         describe('and direction condition is configured to "up"', () => {
           describe('and the user scrolls up', () => {
-            it('should trigger the configured action', () => {
-
-            });
-
-            xit('should call the action with the success result as an argument', () => {
+            it('should call the action with the success result as an argument', () => {
               eventListener
                 .conditions({ direction: 'up' })
                 .action(action)
                 .listen();
 
+              document.body.scrollTop = initialScrollPosition + 1;
               document.dispatchEvent(scrollEvent);
 
               expect(action).toHaveBeenCalledWith(true);
@@ -115,7 +114,15 @@ describe('actonscroll', () => {
 
           describe('and the user scrolls down', () => {
             it('should NOT trigger the configured action', () => {
+              eventListener
+                .conditions({ direction: 'up' })
+                .action(action)
+                .listen();
 
+              document.body.scrollTop = initialScrollPosition - 1;
+              document.dispatchEvent(scrollEvent);
+
+              expect(action).not.toHaveBeenCalled();
             });
           });
         });
@@ -129,16 +136,15 @@ describe('actonscroll', () => {
         });
 
         describe('and the scroll position is greater than the configured value', () => {
-          it('should trigger the configured action', () => {
+          it('should call the action with the success result as an argument', () => {
+            const offset = 20;
 
-          });
-
-          xit('should call the action with the success result as an argument', () => {
             eventListener
-              .conditions({ offset: 200 })
+              .conditions({ offset })
               .action(action)
               .listen();
 
+            document.body.scrollTop = offset + 1;
             document.dispatchEvent(scrollEvent);
 
             expect(action).toHaveBeenCalledWith(true);
@@ -147,17 +153,23 @@ describe('actonscroll', () => {
 
         describe('and the scroll position is less than the configured value', () => {
           it('should NOT trigger the configured action', () => {
+            const offset = 20;
 
+            eventListener
+              .conditions({ offset })
+              .action(action)
+              .listen();
+
+            document.body.scrollTop = offset - 1;
+            document.dispatchEvent(scrollEvent);
+
+            expect(action).not.toHaveBeenCalled();
           });
         });
       });
 
       describe('when custom condition is configured', () => {
         describe('and it succeeds', () => {
-          it('should trigger the configured action', () => {
-
-          });
-
           it('should call the action with the success result as an argument', () => {
             const success = 'success';
             const customCondition = jest.fn(() => success);
@@ -174,7 +186,15 @@ describe('actonscroll', () => {
 
         describe('and it does NOT succeed', () => {
           it('should NOT trigger the configured action', () => {
+            const customCondition = jest.fn(() => false);
+            eventListener
+              .conditions({ custom: customCondition })
+              .action(action)
+              .listen();
 
+            document.dispatchEvent(scrollEvent);
+
+            expect(action).not.toHaveBeenCalled();
           });
         });
       });
