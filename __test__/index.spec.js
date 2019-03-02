@@ -7,27 +7,9 @@ describe('actonscroll', () => {
   });
 
   describe('actonscroll.create()', () => {
-    document.body.innerHTML = `
-<html>
-  <body>
-    <section>
-      <article>
-        <div class="container">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ullamcorper luctus lectus. Duis sit amet vestibulum augue, vel congue ligula. Cras auctor congue ex, id faucibus orci euismod sit amet. Maecenas ac urna lectus. Nulla mollis semper eros, vitae posuere dolor molestie et. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis in neque purus. Fusce id elit tempor, porttitor ligula non, ullamcorper ex. Aenean placerat sem et diam commodo pellentesque. Maecenas volutpat est ultrices ipsum vulputate, in imperdiet lorem tempor. Suspendisse consequat odio eget ex fringilla, ac sodales quam ultrices. Nunc non venenatis orci.</p>
-
-          <p>Vivamus ut venenatis mauris. Praesent faucibus in velit vehicula aliquam. Pellentesque ut metus quis nibh congue fringilla ac et mauris. Donec porttitor fringilla ipsum sit amet efficitur. Vivamus ex ipsum, cursus sed lacus quis, vulputate ultricies enim. Etiam fermentum metus sit amet pharetra fermentum. Curabitur ornare pretium neque, nec cursus mi accumsan nec. Etiam in dui non lacus aliquam lacinia et quis erat. Fusce ultrices massa arcu, sed suscipit justo convallis nec. Phasellus facilisis porta enim feugiat tempor. Morbi eget tortor magna. Phasellus euismod euismod accumsan. Mauris magna justo, rhoncus vitae felis at, faucibus pulvinar ante. Morbi finibus nulla quis imperdiet sodales.</p>
-
-          <p>Fusce vitae ipsum odio. Praesent suscipit, tellus quis ullamcorper dictum, lacus neque mattis tellus, non tempus lectus tortor vel purus. Donec a ex ornare diam tristique rutrum. Nulla aliquet posuere felis sed gravida. Suspendisse viverra porttitor elit nec scelerisque. Aenean rhoncus neque porta justo fringilla efficitur. Nullam sollicitudin iaculis feugiat. Curabitur eget fringilla ligula. Sed ultricies rhoncus ante. Pellentesque rhoncus mattis odio, vitae cursus odio malesuada in. Maecenas at dui arcu. Proin eu augue in dolor tristique vehicula consectetur in risus. Sed a tortor sodales orci fringilla rutrum. Quisque sed libero malesuada, efficitur sem at, tincidunt arcu. Fusce ultricies lacus eget massa porttitor volutpat.</p>
-        </div>
-      </article>
-    </section>
-  </body>
-</html>
-`;
-
     const scrollEvent = new Event('scroll');
-    const action = jest.fn();
     const initialScrollPosition = 10;
+    const action = jest.fn();
     let eventListener;
 
     it('should be an instance of ScrollListener', () => {
@@ -44,7 +26,7 @@ describe('actonscroll', () => {
 
     beforeEach(() => {
       document.body.scrollTop = initialScrollPosition;
-      eventListener = actonscroll.create().throttling(10);
+      eventListener = actonscroll.create().throttling(0);
     });
 
     afterEach(() => {
@@ -217,12 +199,9 @@ describe('actonscroll', () => {
             .once(false)
             .listen();
 
-          Promise.all(Array.from({ length }, () => new Promise((resolve) => {
-            setTimeout(() => {
-              document.dispatchEvent(scrollEvent);
-              resolve();
-            }, 50);
-          }))).then(() => expect(action.mock.calls.length).toBe(length));
+          Array.from({ length }, () => document.dispatchEvent(scrollEvent));
+
+          expect(action.mock.calls.length).toBe(length);
         });
       });
 
@@ -233,12 +212,9 @@ describe('actonscroll', () => {
             .once()
             .listen();
 
-          Promise.all(Array.from({ length: 3 }, () => new Promise((resolve) => {
-            setTimeout(() => {
-              document.dispatchEvent(scrollEvent);
-              resolve();
-            }, 50);
-          }))).then(() => expect(action.mock.calls.length).toBe(1));
+          Array.from({ length: 3 }, () => document.dispatchEvent(scrollEvent));
+
+          expect(action.mock.calls.length).toBe(1);
         });
       });
     });
