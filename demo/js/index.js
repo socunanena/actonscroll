@@ -18,7 +18,7 @@ function createListener(exampleClass) {
 
 document.addEventListener('DOMContentLoaded', () => {
   actonscroll.create()
-    .action(generateAction('.notification'))
+    .action(generateAction('.result-body'))
     .listen();
 
   createListener('example-condition-direction')
