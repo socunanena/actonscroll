@@ -81,8 +81,18 @@ class ScrollListener {
    * @returns {ScrollListener}
    */
   conditions({ direction, offset, custom }) {
-    ['up', 'down'].includes(direction) && this._conditions.push(() => this._direction(direction));
-    offset > 0 && this._conditions.push(() => this._offset(offset));
+    const verificationFunctions = {
+      direction: () => this._direction(direction),
+      offset: () => this._offset(offset),
+    };
+
+    // Direction
+    ['up', 'down'].includes(direction) && this._conditions.push(verificationFunctions.direction);
+
+    // Offset
+    offset > 0 && this._conditions.push(verificationFunctions.offset);
+
+    // Custom
     custom && this._conditions.push(custom);
 
     return this;
@@ -156,7 +166,10 @@ class ScrollListener {
   }
 
   _checkConditions() {
-    return this._conditions.reduce((success, condition) => success && condition(), true);
+    return this._conditions.reduce((success, condition) => {
+      const conditionResult = success && condition();
+      return conditionResult && { ...success, [condition.name]: conditionResult };
+    }, true);
   }
 
   /**

@@ -98,7 +98,7 @@ describe('actonscroll', () => {
               document.body.scrollTop = initialScrollPosition + 1;
               document.dispatchEvent(scrollEvent);
 
-              expect(action).toHaveBeenCalledWith(true);
+              expect(action).toHaveBeenCalledWith({ direction: true });
             });
           });
 
@@ -144,7 +144,7 @@ describe('actonscroll', () => {
             document.body.scrollTop = offset + 1;
             document.dispatchEvent(scrollEvent);
 
-            expect(action).toHaveBeenCalledWith(true);
+            expect(action).toHaveBeenCalledWith({ offset: true });
           });
         });
 
@@ -168,16 +168,14 @@ describe('actonscroll', () => {
       describe('when custom condition is configured', () => {
         describe('and it succeeds', () => {
           it('should call the action with the success result as an argument', () => {
-            const success = 'success';
-            const customCondition = jest.fn(() => success);
             eventListener
-              .conditions({ custom: customCondition })
+              .conditions({ custom: () => 'success' })
               .action(action)
               .listen();
 
             document.dispatchEvent(scrollEvent);
 
-            expect(action).toHaveBeenCalledWith(success);
+            expect(action).toHaveBeenCalledWith({ custom: 'success' });
           });
         });
 
