@@ -31,7 +31,7 @@ class ScrollListener {
       .once(false);
 
     this._conditions = [];
-    this._scrollOffset = document.body.scrollTop;
+    this._scrollOffset = getScrollPosition(document);
   }
 
   /**
