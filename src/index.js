@@ -4,6 +4,17 @@ function noActionWarning() {
   console.warn('[Scroll Listener] No action implemented on user scroll');
 }
 
+function getScrollPosition(container) {
+  if (container instanceof Element) {
+    return container.scrollTop;
+  } else {
+    return window.scrollY
+      || window.pageYOffset
+      || document.body.scrollTop
+        + (document.documentElement && document.documentElement.scrollTop || 0);
+  }
+}
+
 /**
  * Executes a predefined action when the scroll event is triggered.
  */
@@ -80,7 +91,7 @@ class ScrollListener {
   _direction(direction) {
     const directions = { 'up': 1, 'down': -1 };
 
-    const currentScrollOffset = (this._container.body || this._container).scrollTop;
+    const currentScrollOffset = getScrollPosition(this._container);
     const offsetDiff = currentScrollOffset - this._scrollOffset;
     this._scrollOffset = currentScrollOffset;
 
@@ -88,9 +99,7 @@ class ScrollListener {
   }
 
   _offset(offset) {
-    const currentScrollOffset = (this._container.body || this._container).scrollTop;
-
-    return offset < currentScrollOffset;
+    return offset < getScrollPosition(this._container);
   }
 
   /**
