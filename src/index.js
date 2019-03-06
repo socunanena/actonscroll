@@ -19,19 +19,34 @@ function getScrollPosition(container) {
  * Executes a predefined action when the scroll event is triggered.
  */
 class ScrollListener {
-  constructor() {
-    this._init();
+  /**
+   * @param {Object} [options]
+   * @param {Element} [options.container]
+   * @param {Function} [options.action]
+   * @param {Object} [options.conditions]
+   * @param {number} [options.throttling]
+   * @param {boolean} [options.once]
+   */
+  constructor(options) {
+    this._init(options);
   }
 
-  _init() {
-    this
-      .container(document)
-      .action(noActionWarning)
-      .throttling(200)
-      .once(false);
-
+  _init({
+    container = document,
+    action = noActionWarning,
+    conditions = {},
+    throttling = 200,
+    once = false,
+  } = {}) {
     this._conditions = [];
     this._scrollOffset = getScrollPosition(document);
+
+    this
+      .container(container)
+      .action(action)
+      .conditions(conditions)
+      .throttling(throttling)
+      .once(once);
   }
 
   /**
@@ -192,5 +207,5 @@ class ScrollListener {
 }
 
 export default {
-  create: () => new ScrollListener(),
+  create: (options) => new ScrollListener(options),
 };
