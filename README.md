@@ -8,14 +8,22 @@ $ yarn add actonscroll
 
 # Usage
 
-## Basic example
-
 ```javascript
 import actonscroll from 'actonscroll';
 
+// Passing arguments to the creator
+actonscroll.create({ action: () => console.log('Scrooolling!') })
+  .listen();
+
+// Calling specific method for each option
 actonscroll.create()
   .action(() => console.log('Scrooolling!'))
   .listen();
+
+// Revoke
+const listener = actonscroll.create();
+listener.listen();
+listener.revoke();
 ```
 
 # Documentation
@@ -57,6 +65,19 @@ Executes a predefined action when the scroll event is triggered.
     * [.once([once])](#ScrollListener+once) ⇒ [<code>ScrollListener</code>](#ScrollListener)
     * [.listen()](#ScrollListener+listen)
     * [.revoke()](#ScrollListener+revoke)
+
+<a name="new_ScrollListener_new"></a>
+
+### new ScrollListener([options])
+
+| Param | Type |
+| --- | --- |
+| [options] | <code>Object</code> |
+| [options.container] | <code>Element</code> |
+| [options.action] | <code>function</code> |
+| [options.conditions] | <code>Object</code> |
+| [options.throttling] | <code>number</code> |
+| [options.once] | <code>boolean</code> |
 
 <a name="ScrollListener+container"></a>
 
