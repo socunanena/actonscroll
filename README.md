@@ -36,18 +36,34 @@ Allows you to create several <code>ScrollListener</code> instances.
 **Kind**: global object
 
 * [actonscroll](#actonscroll)
-  * [.create()](#actonscroll+create) ⇒ [<code>ScrollListener</code>](#ScrollListener)
+  * [.create([options])](#actonscroll+create) ⇒ [<code>ScrollListener</code>](#ScrollListener)
 
 <a name="actonscroll+create"></a>
 
-### actonscroll.create() ⇒ [<code>ScrollListener</code>](#ScrollListener)
+### actonscroll.create([options]) ⇒ [<code>ScrollListener</code>](#ScrollListener)
 Creates an instance of [<code>ScrollListener</code>](#ScrollListener).
 
 **Kind**: function
 
+| Param | Type |
+| --- | --- |
+| [options] | <code>Object</code> |
+| [options.container] | <code>Element</code> |
+| [options.action] | <code>function</code> |
+| [options.conditions] | <code>Object</code> |
+| [options.throttling] | <code>number</code> |
+| [options.once] | <code>boolean</code> |
+
 **Example**
 ```js
 const scrollListener = actonscroll.create();
+const scrollListenerWithOptions = actonscroll.create({
+  container,
+  action,
+  conditions,
+  throttling,
+  once,
+});
 ```
 
 <a name="ScrollListener"></a>
