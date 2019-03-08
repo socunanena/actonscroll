@@ -21,7 +21,7 @@ function getScrollPosition(container) {
 class ScrollListener {
   /**
    * @param {Object} [options]
-   * @param {Element} [options.container]
+   * @param {Document|Element} [options.container]
    * @param {Function} [options.action]
    * @param {Object} [options.conditions]
    * @param {number} [options.throttling]
@@ -55,7 +55,7 @@ class ScrollListener {
    * @example
    * scrollListener.container(document.querySelector('.my-container'));
    *
-   * @param {Element} container
+   * @param {Document|Element} container
    * @returns {ScrollListener}
    */
   container(container) {

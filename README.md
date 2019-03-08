@@ -48,7 +48,7 @@ Creates an instance of [<code>ScrollListener</code>](#ScrollListener).
 | Param | Type |
 | --- | --- |
 | [options] | <code>Object</code> |
-| [options.container] | <code>Element</code> |
+| [options.container] | <code>Document</code> / <code>Element</code> |
 | [options.action] | <code>function</code> |
 | [options.conditions] | <code>Object</code> |
 | [options.throttling] | <code>number</code> |
@@ -89,7 +89,7 @@ Executes a predefined action when the scroll event is triggered.
 | Param | Type |
 | --- | --- |
 | [options] | <code>Object</code> |
-| [options.container] | <code>Element</code> |
+| [options.container] | <code>Document</code> / <code>Element</code> |
 | [options.action] | <code>function</code> |
 | [options.conditions] | <code>Object</code> |
 | [options.throttling] | <code>number</code> |
