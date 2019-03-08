@@ -38,7 +38,7 @@ class ScrollListener {
     throttling = 200,
     once = false,
   } = {}) {
-    this._conditions = [];
+    this._conditions = {};
     this._scrollOffset = getScrollPosition(document);
 
     this
@@ -102,13 +102,19 @@ class ScrollListener {
     };
 
     // Direction
-    ['up', 'down'].includes(direction) && this._conditions.push(verificationFunctions.direction);
+    if (['up', 'down'].includes(direction)) {
+      this._conditions.direction = verificationFunctions.direction;
+    }
 
     // Offset
-    offset > 0 && this._conditions.push(verificationFunctions.offset);
+    if (offset > 0) {
+      this._conditions.offset = verificationFunctions.offset;
+    }
 
     // Custom
-    custom && this._conditions.push(custom);
+    if (custom) {
+      this._conditions.custom = custom;
+    }
 
     return this;
   }
@@ -181,10 +187,12 @@ class ScrollListener {
   }
 
   _checkConditions() {
-    return this._conditions.reduce((success, condition) => {
-      const conditionResult = success && condition();
-      return conditionResult && { ...success, [condition.name]: conditionResult };
-    }, true);
+    let checkedConditions = {};
+
+    return Object.entries(this._conditions).every(([type, condition]) => {
+      checkedConditions[type] = condition();
+      return checkedConditions[type];
+    }) && checkedConditions;
   }
 
   /**
