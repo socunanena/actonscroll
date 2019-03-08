@@ -83,7 +83,7 @@ describe('actonscroll', () => {
 
             document.dispatchEvent(scrollEvent);
 
-            expect(action).toHaveBeenCalledWith(true);
+            expect(action).toHaveBeenCalledWith({});
           });
         });
 
@@ -128,7 +128,7 @@ describe('actonscroll', () => {
 
             document.dispatchEvent(scrollEvent);
 
-            expect(action).toHaveBeenCalledWith(true);
+            expect(action).toHaveBeenCalledWith({});
           });
         });
 
