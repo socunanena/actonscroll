@@ -1,18 +1,10 @@
 import throttle from 'lodash.throttle';
+import getScrollPosition from './helpers/getScrollPosition';
+import verifyDirection from './conditions/direction';
+import verifyOffset from './conditions/offset';
 
 function noActionWarning() {
   console.warn('[Scroll Listener] No action implemented on user scroll');
-}
-
-function getScrollPosition(container) {
-  if (container instanceof Element) {
-    return container.scrollTop;
-  } else {
-    return window.scrollY
-      || window.pageYOffset
-      || document.body.scrollTop
-        + (document.documentElement && document.documentElement.scrollTop || 0);
-  }
 }
 
 /**
@@ -28,6 +20,9 @@ class ScrollListener {
    * @param {boolean} [options.once]
    */
   constructor(options) {
+    this._verifyDirection = verifyDirection.bind(this);
+    this._verifyOffset = verifyOffset.bind(this);
+
     this._init(options);
   }
 
@@ -39,7 +34,6 @@ class ScrollListener {
     once = false,
   } = {}) {
     this._conditions = {};
-    this._scrollOffset = getScrollPosition(document);
 
     this
       .container(container)
@@ -47,6 +41,8 @@ class ScrollListener {
       .conditions(conditions)
       .throttling(throttling)
       .once(once);
+
+    this._scrollOffset = getScrollPosition(container);
   }
 
   /**
@@ -96,19 +92,14 @@ class ScrollListener {
    * @returns {ScrollListener}
    */
   conditions({ direction, offset, custom }) {
-    const verificationFunctions = {
-      direction: () => this._direction(direction),
-      offset: () => this._offset(offset),
-    };
-
     // Direction
     if (['up', 'down'].includes(direction)) {
-      this._conditions.direction = verificationFunctions.direction;
+      this._conditions.direction = () => this._verifyDirection(direction);
     }
 
     // Offset
     if (offset > 0) {
-      this._conditions.offset = verificationFunctions.offset;
+      this._conditions.offset = () => this._verifyOffset(offset);
     }
 
     // Custom
@@ -117,20 +108,6 @@ class ScrollListener {
     }
 
     return this;
-  }
-
-  _direction(direction) {
-    const directions = { 'up': 1, 'down': -1 };
-
-    const currentScrollOffset = getScrollPosition(this._container);
-    const offsetDiff = currentScrollOffset - this._scrollOffset;
-    this._scrollOffset = currentScrollOffset;
-
-    return offsetDiff / directions[direction] > 0;
-  }
-
-  _offset(offset) {
-    return offset < getScrollPosition(this._container);
   }
 
   /**
