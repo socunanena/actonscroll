@@ -63,7 +63,10 @@ describe('actonscroll', () => {
           } catch (error) {
             if (
               error.name === 'TypeError'
-              && error.message === 'this._container.addEventListener is not a function'
+              && [
+                'this._container.addEventListener is not a function',
+                'this._container.removeEventListener is not a function'
+              ].includes(error.message)
             ) {
               done();
             } else {

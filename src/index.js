@@ -147,7 +147,7 @@ class ScrollListener {
    * scrollListener.listen();
    */
   listen() {
-    const executeAction = () => {
+    const runAction = () => {
       const success = this._checkConditions();
       if (success) {
         this._action(success);
@@ -158,7 +158,9 @@ class ScrollListener {
       }
     };
 
-    this._throttledExecution = throttle(executeAction, this._throttling);
+    this._stop();
+
+    this._throttledAction = throttle(runAction, this._throttling);
 
     this._start();
   }
@@ -183,11 +185,11 @@ class ScrollListener {
   }
 
   _start() {
-    this._container.addEventListener('scroll', this._throttledExecution);
+    this._container.addEventListener('scroll', this._throttledAction);
   }
 
   _stop() {
-    this._container.removeEventListener('scroll', this._throttledExecution);
+    this._container.removeEventListener('scroll', this._throttledAction);
   }
 }
 
