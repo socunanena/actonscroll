@@ -21,24 +21,49 @@ document.addEventListener('DOMContentLoaded', () => {
     .action(generateAction('.result-body'))
     .listen();
 
-  createListener('example-condition-direction')
-    .conditions({ direction: 'up' })
+  const elementCD = document.querySelector('.config-condition-direction');
+  const listenerCD = createListener('example-condition-direction');
+  listenerCD
+    .conditions({ direction: elementCD.value })
     .listen();
+  elementCD.onchange = event => listenerCD.conditions({ direction: event.srcElement.value });
 
-  createListener('example-condition-offset')
-    .conditions({ offset: 300 })
+  const elementCO = document.querySelector('.config-condition-offset');
+  const listenerCO = createListener('example-condition-offset');
+  listenerCO
+    .conditions({ offset: elementCO.value })
     .listen();
+  elementCO.onkeyup = event => listenerCO.conditions({ offset: event.srcElement.value });
 
-  createListener('example-condition-custom')
-    .conditions({ custom: () => document.getElementById('custom-condition-switch').checked })
+  const elementCC = document.querySelector('.config-condition-custom');
+  const listenerCC = createListener('example-condition-custom');
+  listenerCC
+    .conditions({ custom: () => eval(elementCC.value) })
     .listen();
+  elementCC.onkeyup = event => listenerCC.conditions({
+    custom: () => {
+      try {
+        elementCC.style.borderColor = 'white';
+        elementCC.style.backgroundColor = 'white';
+        return eval(event.srcElement.value);
+      } catch (error) {
+        elementCC.style.borderColor = '#c36565';
+        elementCC.style.backgroundColor = '#ff8484';
+      }
+    },
+  });
 
-  createListener('example-throttling')
-    .throttling(2000)
+  const elementT = document.querySelector('.config-throttling');
+  const listenerT = createListener('example-throttling');
+  listenerT
+    .throttling(elementT.value)
     .listen();
+  elementT.onkeyup = event => listenerT.throttling(event.srcElement.value).listen();
 
-  createListener('example-once')
-    .once()
+  const elementO = document.querySelector('.config-once');
+  const listenerO = createListener('example-once');
+  listenerO
+    .once(elementO.checked)
     .listen();
+  elementO.onchange = event => listenerO.once(event.srcElement.checked).listen();
 });
-

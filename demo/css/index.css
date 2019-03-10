@@ -66,8 +66,12 @@ article > div {
   padding-left: 20px;
 }
 
-.description {
-  margin-bottom: 20px;
+.description, .configuration {
+  margin-bottom: 10px;
+}
+
+input[type=text] {
+  width: 95%;
 }
 
 .result {
