@@ -1,6 +1,7 @@
 import throttle from 'lodash.throttle';
 import getScrollPosition from './helpers/getScrollPosition';
 import verifyDirection from './conditions/direction';
+import verifyDirections from './conditions/directions';
 import verifyOffset from './conditions/offset';
 
 function noActionWarning() {
@@ -20,6 +21,7 @@ class ScrollListener {
    * @param {boolean} [options.once]
    */
   constructor(options) {
+    this._verifyDirections = verifyDirections.bind(this);
     this._verifyDirection = verifyDirection.bind(this);
     this._verifyOffset = verifyOffset.bind(this);
 
@@ -91,7 +93,11 @@ class ScrollListener {
    * @param {Function} conditions.custom
    * @returns {ScrollListener}
    */
-  conditions({ direction, offset, custom }) {
+  conditions({ direction, directions, offset, custom }) {
+    // Directions
+    /* check params */
+    this._conditions.directions = () => this._verifyDirections(directions);
+
     // Direction
     if (['up', 'down'].includes(direction)) {
       this._conditions.direction = () => this._verifyDirection(direction);

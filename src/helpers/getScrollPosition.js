@@ -5,11 +5,20 @@
  */
 export default function getScrollPosition(container) {
   if (container instanceof Element) {
-    return container.scrollTop;
+    return {
+      x: this._container.scrollLeft,
+      y: this._container.scrollTop,
+    };
   } else {
-    return window.scrollY
+    return {
+      x: window.scrollX
+      || window.pageXOffset
+      || document.body.scrollLeft
+      + (document.documentElement && document.documentElement.scrollLeft || 0),
+      y: window.scrollY
       || window.pageYOffset
       || document.body.scrollTop
-        + (document.documentElement && document.documentElement.scrollTop || 0);
+      + (document.documentElement && document.documentElement.scrollTop || 0),
+    };
   }
 }
