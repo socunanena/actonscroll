@@ -21,19 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
     .action(generateAction('.result-body'))
     .listen();
 
-  const elementCDV = document.querySelector('.config-condition-direction-vertical');
-  const listenerCDH = createListener('example-condition-direction-vertical');
-  listenerCDH
-    .conditions({ directions: elementCDV.value })
+  const elementCD = document.querySelector('.config-condition-direction');
+  const listenerCD = createListener('example-condition-direction');
+  listenerCD
+    .conditions({ directions: elementCD.value })
     .listen();
-  elementCDV.onchange = event => listenerCDH.conditions({ directions: event.srcElement.value });
-
-  const elementCDH = document.querySelector('.config-condition-direction-horizontal');
-  const listenerCDH = createListener('example-condition-direction-horizontal');
-  listenerCDH
-    .conditions({ directions: elementCDH.value })
-    .listen();
-  elementCDH.onchange = event => listenerCDH.conditions({ directions: event.srcElement.value });
+  elementCD.onchange = event => listenerCD.conditions({
+    directions: Array.from(event.srcElement.selectedOptions).map(o => o.value),
+  });
 
   const elementCO = document.querySelector('.config-condition-offset');
   const listenerCO = createListener('example-condition-offset');

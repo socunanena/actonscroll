@@ -59,6 +59,11 @@ article > div {
 
 .container::-webkit-scrollbar {
   width: 0;
+  height: 0;
+}
+
+.container div {
+  width: 600px;
 }
 
 .options {

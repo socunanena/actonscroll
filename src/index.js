@@ -82,25 +82,21 @@ class ScrollListener {
    *
    * @example
    * scrollListener.conditions({
-   *   direction: 'up',
+   *   directions: ['up', 'left'],
    *   offset: 200,
    *   custom: () => true,
    * });
    *
    * @param {Object} conditions
-   * @param {string} conditions.direction Allowed values: <code>'up'</code>, <code>'down'</code>.
+   * @param {string[]} conditions.directions Allowed values: <code>'all'</code>, <code>'vertical'</code>, <code>'horizontal'</code>, <code>'up'</code>, <code>'down'</code>, <code>'left'</code>, <code>'right'</code>.
    * @param {number} conditions.offset In pixels.
    * @param {Function} conditions.custom
    * @returns {ScrollListener}
    */
-  conditions({ direction, directions, offset, custom }) {
+  conditions({ directions, offset, custom }) {
     // Directions
-    /* check params */
-    this._conditions.directions = () => this._verifyDirections(directions);
-
-    // Direction
-    if (['up', 'down'].includes(direction)) {
-      this._conditions.direction = () => this._verifyDirection(direction);
+    if (['all', 'vertical', 'horizontal', 'up', 'down', 'left', 'right'].includes(directions)) {
+      this._conditions.directions = () => this._verifyDirections(directions);
     }
 
     // Offset
