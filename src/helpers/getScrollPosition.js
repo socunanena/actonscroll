@@ -6,8 +6,8 @@
 export default function getScrollPosition(container) {
   if (container instanceof Element) {
     return {
-      x: this._container.scrollLeft,
-      y: this._container.scrollTop,
+      x: container.scrollLeft,
+      y: container.scrollTop,
     };
   } else {
     return {

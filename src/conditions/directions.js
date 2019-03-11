@@ -1,35 +1,35 @@
 import getScrollPosition from '../helpers/getScrollPosition';
 
-function getCoordinates(directions) {
-  const primitiveDirections = directions.reduce(
-    (primitiveDirections, directions) => {
+function parse(directions) {
+  // const primitiveDirections = directions.reduce(
+  //   (primitiveDirections, directions) => {
+  //
+  //   },
+  //   [],
+  // );
 
-    },
-    [],
-  );
-
-  const directionsMap = {
+  const config = {
     up: { axis: 'y', value: 1 },
     down: { axis: 'y', value: -1 },
     left: { axis: 'x', value: -1 },
     right: { axis: 'x', value: 1 },
   };
+  const parsed = { x: false, y: false };
 
-  return directions.reduce((coordinates, direction) => {
-    coordinates[directionsMap[direction].axis] += directionsMap[direction].value;
-    return coordinates;
-  }, { x: null, y: null });
+  directions.map((direction) => parsed[config[direction].axis] += config[direction].value);
+
+  return parsed;
 }
 
 export default function verifyDirections(directions) {
-  const coordinates = getCoordinates(directions);
+  const config = parse(directions);
 
-  const { x, y } = getScrollPosition();
+  const { x, y } = getScrollPosition(this._container);
   const offsetDiffX = x - this._scrollOffset.x;
   const offsetDiffY = y - this._scrollOffset.y;
-  this._scrollOffset.x = offsetDiffX;
-  this._scrollOffset.y = offsetDiffY;
+  this._scrollOffset.x = x;
+  this._scrollOffset.y = y;
 
-  return offsetDiffX && coordinates.x === 0 || offsetDiffX / coordinates.x > 0
-    || offsetDiffY && coordinates.y === 0 || offsetDiffY / coordinates.y > 0;
+  return config.x !== false && offsetDiffX && (config.x === 0 || offsetDiffX / config.x > 0) && (offsetDiffX > 0 && 'right' || offsetDiffX < 0 && 'left')
+  || config.y !== false && offsetDiffY && (config.y === 0 || offsetDiffY / config.y > 0) && (offsetDiffY > 0 && 'up' || offsetDiffY < 0 && 'down');
 }

@@ -22,7 +22,6 @@ class ScrollListener {
    */
   constructor(options) {
     this._verifyDirections = verifyDirections.bind(this);
-    this._verifyDirection = verifyDirection.bind(this);
     this._verifyOffset = verifyOffset.bind(this);
 
     this._init(options);
@@ -43,8 +42,6 @@ class ScrollListener {
       .conditions(conditions)
       .throttling(throttling)
       .once(once);
-
-    this._scrollOffset = getScrollPosition(container);
   }
 
   /**
@@ -58,6 +55,7 @@ class ScrollListener {
    */
   container(container) {
     this._container = container;
+    this._scrollOffset = getScrollPosition(container);
 
     return this;
   }
@@ -95,9 +93,9 @@ class ScrollListener {
    */
   conditions({ directions, offset, custom }) {
     // Directions
-    if (['all', 'vertical', 'horizontal', 'up', 'down', 'left', 'right'].includes(directions)) {
+    // if (['all', 'vertical', 'horizontal', 'up', 'down', 'left', 'right'].includes(directions)) {
       this._conditions.directions = () => this._verifyDirections(directions);
-    }
+    // }
 
     // Offset
     if (offset > 0) {
