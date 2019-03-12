@@ -14,8 +14,8 @@ function parse(directions) {
   const config = {
     up: { axis: 'y', value: 1 },
     down: { axis: 'y', value: -1 },
-    left: { axis: 'x', value: -1 },
-    right: { axis: 'x', value: 1 },
+    left: { axis: 'x', value: 1 },
+    right: { axis: 'x', value: -1 },
   };
   const parsed = { x: false, y: false };
 
@@ -33,6 +33,6 @@ export default function verifyDirections(directions) {
   this._scrollOffset.x = x;
   this._scrollOffset.y = y;
 
-  return config.x !== false && offsetDiffX && (config.x === 0 || offsetDiffX / config.x > 0) && (offsetDiffX > 0 && 'right' || offsetDiffX < 0 && 'left')
+  return config.x !== false && offsetDiffX && (config.x === 0 || offsetDiffX / config.x > 0) && (offsetDiffX > 0 && 'left' || offsetDiffX < 0 && 'right')
   || config.y !== false && offsetDiffY && (config.y === 0 || offsetDiffY / config.y > 0) && (offsetDiffY > 0 && 'up' || offsetDiffY < 0 && 'down');
 }
