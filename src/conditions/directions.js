@@ -1,12 +1,15 @@
 import getScrollPosition from '../helpers/getScrollPosition';
+import directionConversion from '../config/directions';
+
+function toPrimitives(directions) {
+  return [...new Set(directions.reduce(
+    (primitives, direction) => [...primitives, ...directionConversion[direction]],
+    [],
+  ))];
+}
 
 function parse(directions) {
-  // const primitiveDirections = directions.reduce(
-  //   (primitiveDirections, directions) => {
-  //
-  //   },
-  //   [],
-  // );
+  const primitives = toPrimitives(directions);
 
   const config = {
     up: { axis: 'y', value: 1 },
@@ -16,7 +19,7 @@ function parse(directions) {
   };
   const parsed = { x: false, y: false };
 
-  directions.map((direction) => parsed[config[direction].axis] += config[direction].value);
+  primitives.map((direction) => parsed[config[direction].axis] += config[direction].value);
 
   return parsed;
 }
