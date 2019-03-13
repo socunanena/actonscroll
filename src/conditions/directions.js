@@ -1,9 +1,9 @@
 import getScrollPosition from '../helpers/getScrollPosition';
-import directionConversion from '../config/directions';
+import directionsConversion from '../config/directions';
 
 function toPrimitives(directions) {
   return [...new Set(directions.reduce(
-    (primitives, direction) => [...primitives, ...directionConversion[direction]],
+    (primitives, direction) => [...primitives, ...directionsConversion[direction]],
     [],
   ))];
 }

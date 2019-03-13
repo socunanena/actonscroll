@@ -1,6 +1,6 @@
 import throttle from 'lodash.throttle';
 import getScrollPosition from './helpers/getScrollPosition';
-import directionConversion from './config/directions';
+import directionsConversion from './config/directions';
 import verifyDirections from './conditions/directions';
 import verifyOffset from './conditions/offset';
 
@@ -93,7 +93,7 @@ class ScrollListener {
    */
   conditions({ directions, offset, custom }) {
     // Directions
-    if (directions && directions.every(direction => directionConversion[direction])) {
+    if (directions && directions.every(direction => directionsConversion[direction])) {
       this._conditions.directions = () => this._verifyDirections(directions);
     }
 
