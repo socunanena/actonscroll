@@ -13,16 +13,16 @@ import actonscroll from 'actonscroll';
 
 // Passing arguments to the creator
 actonscroll.create({ action: () => console.log('Scrooolling!') })
-  .listen();
+  .start();
 
 // Calling specific method for each option
 actonscroll.create()
   .action(() => console.log('Scrooolling!'))
-  .listen();
+  .start();
 
 // Stop
 const listener = actonscroll.create();
-listener.listen();
+listener.start();
 listener.stop();
 ```
 
@@ -79,7 +79,7 @@ Executes a predefined action when the scroll event is triggered.
     * [.conditions(conditions)](#ScrollListener+conditions) ⇒ [<code>ScrollListener</code>](#ScrollListener)
     * [.throttling(throttling)](#ScrollListener+throttling) ⇒ [<code>ScrollListener</code>](#ScrollListener)
     * [.once([once])](#ScrollListener+once) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-    * [.listen()](#ScrollListener+listen)
+    * [.start()](#ScrollListener+start)
     * [.stop()](#ScrollListener+stop)
 
 <a name="new_ScrollListener_new"></a>
@@ -177,15 +177,15 @@ Determines whether the action should be performed once or not.
 ```js
 scrollListener.once();
 ```
-<a name="ScrollListener+listen"></a>
+<a name="ScrollListener+start"></a>
 
-### scrollListener.listen()
+### scrollListener.start()
 Executes the configured action after checking that all the conditions are satisfied.
 
 **Kind**: instance method of [<code>ScrollListener</code>](#ScrollListener)
 **Example**
 ```js
-scrollListener.listen();
+scrollListener.start();
 ```
 <a name="ScrollListener+stop"></a>
 

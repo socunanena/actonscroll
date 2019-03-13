@@ -19,31 +19,31 @@ function createListener(exampleClass) {
 document.addEventListener('DOMContentLoaded', () => {
   actonscroll.create()
     .action(generateAction('.result-body'))
-    .listen();
+    .start();
 
   const elementCD = document.querySelector('.config-condition-directions');
   const listenerCD = createListener('example-condition-directions');
   listenerCD
     .conditions({ directions: Array.from(elementCD.selectedOptions).map(o => o.value) })
-    .listen();
+    .start();
   elementCD.onchange = event => {
     listenerCD.conditions({
       directions: Array.from(event.srcElement.selectedOptions).map(o => o.value),
     });
-  }
+  };
 
   const elementCO = document.querySelector('.config-condition-offset');
   const listenerCO = createListener('example-condition-offset');
   listenerCO
     .conditions({ offset: elementCO.value })
-    .listen();
+    .start();
   elementCO.onkeyup = event => listenerCO.conditions({ offset: event.srcElement.value });
 
   const elementCC = document.querySelector('.config-condition-custom');
   const listenerCC = createListener('example-condition-custom');
   listenerCC
     .conditions({ custom: () => eval(elementCC.value) })
-    .listen();
+    .start();
   elementCC.onkeyup = event => listenerCC.conditions({
     custom: () => {
       try {
@@ -61,13 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const listenerT = createListener('example-throttling');
   listenerT
     .throttling(elementT.value)
-    .listen();
-  elementT.onkeyup = event => listenerT.throttling(event.srcElement.value).listen();
+    .start();
+  elementT.onkeyup = event => listenerT.throttling(event.srcElement.value).start();
 
   const elementO = document.querySelector('.config-once');
   const listenerO = createListener('example-once');
   listenerO
     .once(elementO.checked)
-    .listen();
-  elementO.onchange = event => listenerO.once(event.srcElement.checked).listen();
+    .start();
+  elementO.onchange = event => listenerO.once(event.srcElement.checked).start();
 });

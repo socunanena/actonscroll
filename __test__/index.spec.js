@@ -21,7 +21,7 @@ describe('actonscroll', () => {
       expect(scrollListener.conditions).toBeInstanceOf(Function);
       expect(scrollListener.throttling).toBeInstanceOf(Function);
       expect(scrollListener.once).toBeInstanceOf(Function);
-      expect(scrollListener.listen).toBeInstanceOf(Function);
+      expect(scrollListener.start).toBeInstanceOf(Function);
       expect(scrollListener.stop).toBeInstanceOf(Function);
     });
 
@@ -38,11 +38,11 @@ describe('actonscroll', () => {
       action.mockClear();
     });
 
-    describe('actonscroll.create().listen()', () => {
+    describe('actonscroll.create().start()', () => {
       describe('when there is no configured action', () => {
         it('should console.warn about it', () => {
           const consoleWarn = jest.spyOn(console, 'warn');
-          eventListener.listen();
+          eventListener.start();
 
           document.dispatchEvent(scrollEvent);
 
@@ -53,12 +53,12 @@ describe('actonscroll', () => {
 
       describe('when unexpected container configured', () => {
         it('should fail adding the scroll event listener to it', (done) => {
-          const fail = 'listen() should throw a TypeError when called on a bad container';
+          const fail = 'start() should throw a TypeError when called on a bad container';
 
           try {
             eventListener
               .container('bad container')
-              .listen();
+              .start();
             done.fail(fail);
           } catch (error) {
             if (
@@ -82,7 +82,7 @@ describe('actonscroll', () => {
             eventListener
               .conditions({ directions: ['bad-direction'] })
               .action(action)
-              .listen();
+              .start();
 
             document.dispatchEvent(scrollEvent);
 
@@ -96,7 +96,7 @@ describe('actonscroll', () => {
               eventListener
                 .conditions({ directions: ['up'] })
                 .action(action)
-                .listen();
+                .start();
 
               document.body.scrollTop = initialScrollPosition + 1;
               document.dispatchEvent(scrollEvent);
@@ -110,7 +110,7 @@ describe('actonscroll', () => {
               eventListener
                 .conditions({ directions: ['up'] })
                 .action(action)
-                .listen();
+                .start();
 
               document.body.scrollTop = initialScrollPosition - 1;
               document.dispatchEvent(scrollEvent);
@@ -127,7 +127,7 @@ describe('actonscroll', () => {
             eventListener
               .conditions({ offset: -1 })
               .action(action)
-              .listen();
+              .start();
 
             document.dispatchEvent(scrollEvent);
 
@@ -142,7 +142,7 @@ describe('actonscroll', () => {
             eventListener
               .conditions({ offset })
               .action(action)
-              .listen();
+              .start();
 
             document.body.scrollTop = offset + 1;
             document.dispatchEvent(scrollEvent);
@@ -158,7 +158,7 @@ describe('actonscroll', () => {
             eventListener
               .conditions({ offset })
               .action(action)
-              .listen();
+              .start();
 
             document.body.scrollTop = offset - 1;
             document.dispatchEvent(scrollEvent);
@@ -174,7 +174,7 @@ describe('actonscroll', () => {
             eventListener
               .conditions({ custom: () => 'success' })
               .action(action)
-              .listen();
+              .start();
 
             document.dispatchEvent(scrollEvent);
 
@@ -188,7 +188,7 @@ describe('actonscroll', () => {
             eventListener
               .conditions({ custom: customCondition })
               .action(action)
-              .listen();
+              .start();
 
             document.dispatchEvent(scrollEvent);
 
@@ -203,7 +203,7 @@ describe('actonscroll', () => {
 
           eventListener
             .throttling(throttling)
-            .listen();
+            .start();
 
           expect(throttle).toHaveBeenCalledWith(expect.anything(), throttling);
         });
@@ -216,7 +216,7 @@ describe('actonscroll', () => {
           eventListener
             .action(action)
             .once(false)
-            .listen();
+            .start();
 
           Array.from({ length }, () => document.dispatchEvent(scrollEvent));
 
@@ -229,7 +229,7 @@ describe('actonscroll', () => {
           eventListener
             .action(action)
             .once()
-            .listen();
+            .start();
 
           Array.from({ length: 3 }, () => document.dispatchEvent(scrollEvent));
 
@@ -242,7 +242,7 @@ describe('actonscroll', () => {
       it('should stop listening to the scroll event', () => {
         eventListener
           .action(action)
-          .listen();
+          .start();
         eventListener
           .stop();
 
