@@ -80,7 +80,7 @@ describe('actonscroll', () => {
         describe('and bad direction is passed', () => {
           it('should not check for the direction condition', () => {
             eventListener
-              .conditions({ direction: 'bad-direction' })
+              .conditions({ directions: ['bad-direction'] })
               .action(action)
               .listen();
 
@@ -94,21 +94,21 @@ describe('actonscroll', () => {
           describe('and the user scrolls up', () => {
             it('should call the action with the success result as an argument', () => {
               eventListener
-                .conditions({ direction: 'up' })
+                .conditions({ directions: ['up'] })
                 .action(action)
                 .listen();
 
               document.body.scrollTop = initialScrollPosition + 1;
               document.dispatchEvent(scrollEvent);
 
-              expect(action).toHaveBeenCalledWith({ direction: true });
+              expect(action).toHaveBeenCalledWith({ directions: 'up' });
             });
           });
 
           describe('and the user scrolls down', () => {
             it('should NOT trigger the configured action', () => {
               eventListener
-                .conditions({ direction: 'up' })
+                .conditions({ directions: ['up'] })
                 .action(action)
                 .listen();
 

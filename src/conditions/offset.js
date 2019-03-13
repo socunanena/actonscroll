@@ -7,5 +7,6 @@ import getScrollPosition from '../helpers/getScrollPosition';
  * @returns {boolean}
  */
 export default function offset(offset) {
-  return offset < getScrollPosition(this._container);
+  const { y } = getScrollPosition(this._container);
+  return offset < y;
 }
