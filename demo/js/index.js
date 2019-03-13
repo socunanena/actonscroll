@@ -21,12 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
     .action(generateAction('.result-body'))
     .listen();
 
-  const elementCD = document.querySelector('.config-condition-direction');
-  const listenerCD = createListener('example-condition-direction');
+  const elementCD = document.querySelector('.config-condition-directions');
+  const listenerCD = createListener('example-condition-directions');
   listenerCD
-    .conditions({ direction: elementCD.value })
+    .conditions({ directions: Array.from(elementCD.selectedOptions).map(o => o.value) })
     .listen();
-  elementCD.onchange = event => listenerCD.conditions({ direction: event.srcElement.value });
+  elementCD.onchange = event => {
+    listenerCD.conditions({
+      directions: Array.from(event.srcElement.selectedOptions).map(o => o.value),
+    });
+  }
 
   const elementCO = document.querySelector('.config-condition-offset');
   const listenerCO = createListener('example-condition-offset');

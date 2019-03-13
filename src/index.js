@@ -1,6 +1,7 @@
 import throttle from 'lodash.throttle';
 import getScrollPosition from './helpers/getScrollPosition';
-import verifyDirection from './conditions/direction';
+import directionsConversion from './config/directions';
+import verifyDirections from './conditions/directions';
 import verifyOffset from './conditions/offset';
 
 function noActionWarning() {
@@ -20,7 +21,7 @@ class ScrollListener {
    * @param {boolean} [options.once]
    */
   constructor(options) {
-    this._verifyDirection = verifyDirection.bind(this);
+    this._verifyDirections = verifyDirections.bind(this);
     this._verifyOffset = verifyOffset.bind(this);
 
     this._init(options);
@@ -41,8 +42,6 @@ class ScrollListener {
       .conditions(conditions)
       .throttling(throttling)
       .once(once);
-
-    this._scrollOffset = getScrollPosition(container);
   }
 
   /**
@@ -56,6 +55,7 @@ class ScrollListener {
    */
   container(container) {
     this._container = container;
+    this._scrollOffset = getScrollPosition(container);
 
     return this;
   }
@@ -80,21 +80,21 @@ class ScrollListener {
    *
    * @example
    * scrollListener.conditions({
-   *   direction: 'up',
+   *   directions: ['up', 'left'],
    *   offset: 200,
    *   custom: () => true,
    * });
    *
    * @param {Object} conditions
-   * @param {string} conditions.direction Allowed values: <code>'up'</code>, <code>'down'</code>.
+   * @param {string[]} conditions.directions Allowed values: <code>'all'</code>, <code>'vertical'</code>, <code>'horizontal'</code>, <code>'up'</code>, <code>'down'</code>, <code>'left'</code>, <code>'right'</code>.
    * @param {number} conditions.offset In pixels.
    * @param {Function} conditions.custom
    * @returns {ScrollListener}
    */
-  conditions({ direction, offset, custom }) {
-    // Direction
-    if (['up', 'down'].includes(direction)) {
-      this._conditions.direction = () => this._verifyDirection(direction);
+  conditions({ directions, offset, custom }) {
+    // Directions
+    if (directions && directions.every(direction => directionsConversion[direction])) {
+      this._conditions.directions = () => this._verifyDirections(directions);
     }
 
     // Offset

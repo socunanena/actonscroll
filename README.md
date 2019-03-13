@@ -135,14 +135,14 @@ Sets a list of conditions to determine whether the configured action has to be p
 | Param | Type | Description |
 | --- | --- | --- |
 | conditions | <code>Object</code> |  |
-| conditions.direction | <code>string</code> | Allowed values: <code>'up'</code>, <code>'down'</code>. |
+| conditions.directions | <code>Array.&lt;string&gt;</code> | Allowed values: <code>'all'</code>, <code>'vertical'</code>, <code>'horizontal'</code>, <code>'up'</code>, <code>'down'</code>, <code>'left'</code>, <code>'right'</code>. |
 | conditions.offset | <code>number</code> | In pixels. |
 | conditions.custom | <code>function</code> |  |
 
 **Example**
 ```js
 scrollListener.conditions({
-  direction: 'up',
+  directions: ['up', 'left'],
   offset: 200,
   custom: () => true,
 });
