@@ -144,9 +144,9 @@ class ScrollListener {
    * Executes the configured action after checking that all the conditions are satisfied.
    *
    * @example
-   * scrollListener.listen();
+   * scrollListener.start();
    */
-  listen() {
+  start() {
     const runAction = () => {
       const success = this._checkConditions();
       if (success) {
@@ -178,9 +178,9 @@ class ScrollListener {
    * Removes the listener from the configured container.
    *
    * @example
-   * scrollListener.revoke();
+   * scrollListener.stop();
    */
-  revoke() {
+  stop() {
     this._stop();
   }
 
