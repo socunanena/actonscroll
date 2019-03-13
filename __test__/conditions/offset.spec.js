@@ -1,7 +1,7 @@
 import offset from '../../src/conditions/offset';
 
 const scrollOffset = { x: 0, y: 100 };
-const listener = {
+const actonscroll = {
   _container: document,
   _scrollOffset: scrollOffset,
 };
@@ -18,13 +18,13 @@ describe('offset', () => {
 
   describe('when the current scroll position is greater than the configured offset', () => {
     it('should return true', () => {
-      expect(offset.call(listener, 50)).toBeTruthy();
+      expect(offset.call(actonscroll, 50)).toBeTruthy();
     });
   });
 
   describe('when the current scroll position is greater than the configured offset', () => {
     it('should return false', () => {
-      expect(offset.call(listener, 200)).toBeFalsy();
+      expect(offset.call(actonscroll, 200)).toBeFalsy();
     });
   });
 });

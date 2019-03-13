@@ -1,4 +1,4 @@
-import actonscroll from '../../src/index';
+import Actonscroll from '../../src/index';
 
 function generateAction(resultContainer) {
   return () => {
@@ -10,41 +10,41 @@ function generateAction(resultContainer) {
   };
 }
 
-function createListener(exampleClass) {
-  return actonscroll.create()
+function createActonscroll(exampleClass) {
+  return (new Actonscroll())
     .container(document.querySelector(`.${exampleClass} .container`))
     .action(generateAction(`.${exampleClass} .result`));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  actonscroll.create()
+  (new Actonscroll())
     .action(generateAction('.result-body'))
     .start();
 
   const elementCD = document.querySelector('.config-condition-directions');
-  const listenerCD = createListener('example-condition-directions');
-  listenerCD
+  const actonscrollCD = createActonscroll('example-condition-directions');
+  actonscrollCD
     .conditions({ directions: Array.from(elementCD.selectedOptions).map(o => o.value) })
     .start();
   elementCD.onchange = event => {
-    listenerCD.conditions({
+    actonscrollCD.conditions({
       directions: Array.from(event.srcElement.selectedOptions).map(o => o.value),
     });
   };
 
   const elementCO = document.querySelector('.config-condition-offset');
-  const listenerCO = createListener('example-condition-offset');
-  listenerCO
+  const actonscrollCO = createActonscroll('example-condition-offset');
+  actonscrollCO
     .conditions({ offset: elementCO.value })
     .start();
-  elementCO.onkeyup = event => listenerCO.conditions({ offset: event.srcElement.value });
+  elementCO.onkeyup = event => actonscrollCO.conditions({ offset: event.srcElement.value });
 
   const elementCC = document.querySelector('.config-condition-custom');
-  const listenerCC = createListener('example-condition-custom');
-  listenerCC
+  const actonscrollCC = createActonscroll('example-condition-custom');
+  actonscrollCC
     .conditions({ custom: () => eval(elementCC.value) })
     .start();
-  elementCC.onkeyup = event => listenerCC.conditions({
+  elementCC.onkeyup = event => actonscrollCC.conditions({
     custom: () => {
       try {
         elementCC.style.borderColor = 'white';
@@ -58,16 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const elementT = document.querySelector('.config-throttling');
-  const listenerT = createListener('example-throttling');
-  listenerT
+  const actonscrollT = createActonscroll('example-throttling');
+  actonscrollT
     .throttling(elementT.value)
     .start();
-  elementT.onkeyup = event => listenerT.throttling(event.srcElement.value).start();
+  elementT.onkeyup = event => actonscrollT.throttling(event.srcElement.value).start();
 
   const elementO = document.querySelector('.config-once');
-  const listenerO = createListener('example-once');
-  listenerO
+  const actonscrollO = createActonscroll('example-once');
+  actonscrollO
     .once(elementO.checked)
     .start();
-  elementO.onchange = event => listenerO.once(event.srcElement.checked).start();
+  elementO.onchange = event => actonscrollO.once(event.srcElement.checked).start();
 });

@@ -5,13 +5,13 @@ import verifyDirections from './conditions/directions';
 import verifyOffset from './conditions/offset';
 
 function noActionWarning() {
-  console.warn('[Scroll Listener] No action implemented on user scroll');
+  console.warn('[Actonscroll] No action implemented on user scroll');
 }
 
 /**
  * Executes a predefined action when the scroll event is triggered.
  */
-class ScrollListener {
+export default class Actonscroll {
   /**
    * @param {Object} [options]
    * @param {Document|Element} [options.container]
@@ -48,10 +48,10 @@ class ScrollListener {
    * Sets the container element within which the scroll will be listened.
    *
    * @example
-   * scrollListener.container(document.querySelector('.my-container'));
+   * actonscroll.container(document.querySelector('.my-container'));
    *
    * @param {Document|Element} container
-   * @returns {ScrollListener}
+   * @returns {Actonscroll}
    */
   container(container) {
     this._container = container;
@@ -64,10 +64,10 @@ class ScrollListener {
    * Sets an action to be performed when the scroll event is triggered.
    *
    * @example
-   * scrollListener.action(() => console.log('Scrooolling!'));
+   * actonscroll.action(() => console.log('Scrooolling!'));
    *
    * @param {Function} action
-   * @returns {ScrollListener}
+   * @returns {Actonscroll}
    */
   action(action) {
     this._action = action;
@@ -79,7 +79,7 @@ class ScrollListener {
    * Sets a list of conditions to determine whether the configured action has to be performed or not.
    *
    * @example
-   * scrollListener.conditions({
+   * actonscroll.conditions({
    *   directions: ['up', 'left'],
    *   offset: 200,
    *   custom: () => true,
@@ -89,7 +89,7 @@ class ScrollListener {
    * @param {string[]} conditions.directions Allowed values: <code>'all'</code>, <code>'vertical'</code>, <code>'horizontal'</code>, <code>'up'</code>, <code>'down'</code>, <code>'left'</code>, <code>'right'</code>.
    * @param {number} conditions.offset In pixels.
    * @param {Function} conditions.custom
-   * @returns {ScrollListener}
+   * @returns {Actonscroll}
    */
   conditions({ directions, offset, custom }) {
     // Directions
@@ -114,10 +114,10 @@ class ScrollListener {
    * Sets a throttling time (ms) to the scroll event.
    *
    * @example
-   * scrollListener.throttling(1000);
+   * actonscroll.throttling(1000);
    *
    * @param {number} throttling
-   * @returns {ScrollListener}
+   * @returns {Actonscroll}
    */
   throttling(throttling) {
     this._throttling = throttling;
@@ -129,10 +129,10 @@ class ScrollListener {
    * Determines whether the action should be performed once or not.
    *
    * @example
-   * scrollListener.once();
+   * actonscroll.once();
    *
    * @param {boolean} [once]
-   * @returns {ScrollListener}
+   * @returns {Actonscroll}
    */
   once(once = true) {
     this._once = once;
@@ -144,7 +144,7 @@ class ScrollListener {
    * Executes the configured action after checking that all the conditions are satisfied.
    *
    * @example
-   * scrollListener.start();
+   * actonscroll.start();
    */
   start() {
     const runAction = () => {
@@ -178,7 +178,7 @@ class ScrollListener {
    * Removes the listener from the configured container.
    *
    * @example
-   * scrollListener.stop();
+   * actonscroll.stop();
    */
   stop() {
     this._stop();
@@ -192,7 +192,3 @@ class ScrollListener {
     this._container.removeEventListener('scroll', this._throttledAction);
   }
 }
-
-export default {
-  create: (options) => new ScrollListener(options),
-};

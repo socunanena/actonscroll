@@ -1,7 +1,7 @@
 import verifyDirections from '../../src/conditions/directions';
 
 const scrollOffset = { x: 100, y: 100 };
-const listener = {
+const actonscroll = {
   _container: document,
   _scrollOffset: scrollOffset,
 };
@@ -27,7 +27,7 @@ describe('verifyDirections', () => {
       it('should return "up"', () => {
         window.scrollY += 1;
 
-        expect(verifyDirections.call(listener, ['all'])).toBe('up');
+        expect(verifyDirections.call(actonscroll, ['all'])).toBe('up');
       });
     });
 
@@ -35,7 +35,7 @@ describe('verifyDirections', () => {
       it('should return "down"', () => {
         window.scrollY -= 1;
 
-        expect(verifyDirections.call(listener, ['all'])).toBe('down');
+        expect(verifyDirections.call(actonscroll, ['all'])).toBe('down');
       });
     });
 
@@ -43,7 +43,7 @@ describe('verifyDirections', () => {
       it('should return "left"', () => {
         window.scrollX += 1;
 
-        expect(verifyDirections.call(listener, ['all'])).toBe('left');
+        expect(verifyDirections.call(actonscroll, ['all'])).toBe('left');
       });
     });
 
@@ -51,7 +51,7 @@ describe('verifyDirections', () => {
       it('should return "right"', () => {
         window.scrollX -= 1;
 
-        expect(verifyDirections.call(listener, ['all'])).toBe('right');
+        expect(verifyDirections.call(actonscroll, ['all'])).toBe('right');
       });
     });
   });
@@ -61,7 +61,7 @@ describe('verifyDirections', () => {
       it('should return "up"', () => {
         window.scrollY += 1;
 
-        expect(verifyDirections.call(listener, ['vertical'])).toBe('up');
+        expect(verifyDirections.call(actonscroll, ['vertical'])).toBe('up');
       });
     });
 
@@ -69,7 +69,7 @@ describe('verifyDirections', () => {
       it('should return "down"', () => {
         window.scrollY -= 1;
 
-        expect(verifyDirections.call(listener, ['vertical'])).toBe('down');
+        expect(verifyDirections.call(actonscroll, ['vertical'])).toBe('down');
       });
     });
 
@@ -77,7 +77,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollX += 1;
 
-        expect(verifyDirections.call(listener, ['vertical'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['vertical'])).toBeFalsy();
       });
     });
 
@@ -85,7 +85,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollX -= 1;
 
-        expect(verifyDirections.call(listener, ['vertical'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['vertical'])).toBeFalsy();
       });
     });
   });
@@ -95,7 +95,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollY += 1;
 
-        expect(verifyDirections.call(listener, ['horizontal'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['horizontal'])).toBeFalsy();
       });
     });
 
@@ -103,7 +103,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollY -= 1;
 
-        expect(verifyDirections.call(listener, ['horizontal'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['horizontal'])).toBeFalsy();
       });
     });
 
@@ -111,7 +111,7 @@ describe('verifyDirections', () => {
       it('should return "left"', () => {
         window.scrollX += 1;
 
-        expect(verifyDirections.call(listener, ['horizontal'])).toBe('left');
+        expect(verifyDirections.call(actonscroll, ['horizontal'])).toBe('left');
       });
     });
 
@@ -119,7 +119,7 @@ describe('verifyDirections', () => {
       it('should return "right"', () => {
         window.scrollX -= 1;
 
-        expect(verifyDirections.call(listener, ['horizontal'])).toBe('right');
+        expect(verifyDirections.call(actonscroll, ['horizontal'])).toBe('right');
       });
     });
   });
@@ -129,7 +129,7 @@ describe('verifyDirections', () => {
       it('should return "up"', () => {
         window.scrollY += 1;
 
-        expect(verifyDirections.call(listener, ['up'])).toBe('up');
+        expect(verifyDirections.call(actonscroll, ['up'])).toBe('up');
       });
     });
 
@@ -137,7 +137,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollY -= 1;
 
-        expect(verifyDirections.call(listener, ['up'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['up'])).toBeFalsy();
       });
     });
 
@@ -145,7 +145,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollX += 1;
 
-        expect(verifyDirections.call(listener, ['up'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['up'])).toBeFalsy();
       });
     });
 
@@ -153,7 +153,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollX -= 1;
 
-        expect(verifyDirections.call(listener, ['up'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['up'])).toBeFalsy();
       });
     });
   });
@@ -163,7 +163,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollY += 1;
 
-        expect(verifyDirections.call(listener, ['down'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['down'])).toBeFalsy();
       });
     });
 
@@ -171,7 +171,7 @@ describe('verifyDirections', () => {
       it('should return "down"', () => {
         window.scrollY -= 1;
 
-        expect(verifyDirections.call(listener, ['down'])).toBe('down');
+        expect(verifyDirections.call(actonscroll, ['down'])).toBe('down');
       });
     });
 
@@ -179,7 +179,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollX += 1;
 
-        expect(verifyDirections.call(listener, ['down'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['down'])).toBeFalsy();
       });
     });
 
@@ -187,7 +187,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollX -= 1;
 
-        expect(verifyDirections.call(listener, ['down'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['down'])).toBeFalsy();
       });
     });
   });
@@ -197,7 +197,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollY += 1;
 
-        expect(verifyDirections.call(listener, ['left'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['left'])).toBeFalsy();
       });
     });
 
@@ -205,7 +205,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollY -= 1;
 
-        expect(verifyDirections.call(listener, ['left'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['left'])).toBeFalsy();
       });
     });
 
@@ -213,7 +213,7 @@ describe('verifyDirections', () => {
       it('should return "left"', () => {
         window.scrollX += 1;
 
-        expect(verifyDirections.call(listener, ['left'])).toBe('left');
+        expect(verifyDirections.call(actonscroll, ['left'])).toBe('left');
       });
     });
 
@@ -221,7 +221,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollX -= 1;
 
-        expect(verifyDirections.call(listener, ['left'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['left'])).toBeFalsy();
       });
     });
   });
@@ -231,7 +231,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollY += 1;
 
-        expect(verifyDirections.call(listener, ['right'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['right'])).toBeFalsy();
       });
     });
 
@@ -239,7 +239,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollY -= 1;
 
-        expect(verifyDirections.call(listener, ['right'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['right'])).toBeFalsy();
       });
     });
 
@@ -247,7 +247,7 @@ describe('verifyDirections', () => {
       it('should return false', () => {
         window.scrollX += 1;
 
-        expect(verifyDirections.call(listener, ['right'])).toBeFalsy();
+        expect(verifyDirections.call(actonscroll, ['right'])).toBeFalsy();
       });
     });
 
@@ -255,7 +255,7 @@ describe('verifyDirections', () => {
       it('should return "right"', () => {
         window.scrollX -= 1;
 
-        expect(verifyDirections.call(listener, ['right'])).toBe('right');
+        expect(verifyDirections.call(actonscroll, ['right'])).toBe('right');
       });
     });
   });

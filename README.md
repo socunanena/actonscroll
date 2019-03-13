@@ -9,82 +9,42 @@ $ yarn add actonscroll
 # Usage
 
 ```javascript
-import actonscroll from 'actonscroll';
+import Actonscroll from 'actonscroll';
 
 // Passing arguments to the creator
-actonscroll.create({ action: () => console.log('Scrooolling!') })
+(new Actonscroll({ action: () => console.log('Scrooolling!') }))
   .start();
 
 // Calling specific method for each option
-actonscroll.create()
+(new Actonscroll())
   .action(() => console.log('Scrooolling!'))
   .start();
 
 // Stop
-const listener = actonscroll.create();
-listener.start();
-listener.stop();
+const actonscroll = new Actonscroll();
+actonscroll.start();
+actonscroll.stop();
 ```
 
 # Documentation
 
-<a name="actonscroll"></a>
+<a name="Actonscroll"></a>
 
-## actonscroll (factory)
-Allows you to create several <code>ScrollListener</code> instances.
-
-**Kind**: global object
-
-* [actonscroll](#actonscroll)
-  * [.create([options])](#actonscroll+create) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-
-<a name="actonscroll+create"></a>
-
-### actonscroll.create([options]) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-Creates an instance of [<code>ScrollListener</code>](#ScrollListener).
-
-**Kind**: function
-
-| Param | Type |
-| --- | --- |
-| [options] | <code>Object</code> |
-| [options.container] | <code>Document</code> / <code>Element</code> |
-| [options.action] | <code>function</code> |
-| [options.conditions] | <code>Object</code> |
-| [options.throttling] | <code>number</code> |
-| [options.once] | <code>boolean</code> |
-
-**Example**
-```js
-const scrollListener = actonscroll.create();
-const scrollListenerWithOptions = actonscroll.create({
-  container,
-  action,
-  conditions,
-  throttling,
-  once,
-});
-```
-
-<a name="ScrollListener"></a>
-
-## ScrollListener
+## Actonscroll
 Executes a predefined action when the scroll event is triggered.
 
 **Kind**: global class
 
-* [ScrollListener](#ScrollListener)
-    * [.container(container)](#ScrollListener+container) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-    * [.action(action)](#ScrollListener+action) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-    * [.conditions(conditions)](#ScrollListener+conditions) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-    * [.throttling(throttling)](#ScrollListener+throttling) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-    * [.once([once])](#ScrollListener+once) ⇒ [<code>ScrollListener</code>](#ScrollListener)
-    * [.start()](#ScrollListener+start)
-    * [.stop()](#ScrollListener+stop)
+* [Actonscroll](#Actonscroll)
+    * [.container(container)](#Actonscroll+container) ⇒ [<code>Actonscroll</code>](#Actonscroll)
+    * [.action(action)](#Actonscroll+action) ⇒ [<code>Actonscroll</code>](#Actonscroll)
+    * [.conditions(conditions)](#Actonscroll+conditions) ⇒ [<code>Actonscroll</code>](#Actonscroll)
+    * [.throttling(throttling)](#Actonscroll+throttling) ⇒ [<code>Actonscroll</code>](#Actonscroll)
+    * [.once([once])](#Actonscroll+once) ⇒ [<code>Actonscroll</code>](#Actonscroll)
+    * [.start()](#Actonscroll+start)
+    * [.stop()](#Actonscroll+stop)
 
-<a name="new_ScrollListener_new"></a>
-
-### new ScrollListener([options])
+### new Actonscroll([options])
 
 | Param | Type |
 | --- | --- |
@@ -95,12 +55,12 @@ Executes a predefined action when the scroll event is triggered.
 | [options.throttling] | <code>number</code> |
 | [options.once] | <code>boolean</code> |
 
-<a name="ScrollListener+container"></a>
+<a name="Actonscroll+container"></a>
 
-### scrollListener.container(container) ⇒ [<code>ScrollListener</code>](#ScrollListener)
+### actonscroll.container(container) ⇒ [<code>Actonscroll</code>](#Actonscroll)
 Sets the container element within which the scroll will be listened.
 
-**Kind**: instance method of [<code>ScrollListener</code>](#ScrollListener)
+**Kind**: instance method of [<code>Actonscroll</code>](#Actonscroll)
 
 | Param | Type |
 | --- | --- |
@@ -108,14 +68,14 @@ Sets the container element within which the scroll will be listened.
 
 **Example**
 ```js
-scrollListener.container(document.querySelector('.my-container'));
+actonscroll.container(document.querySelector('.my-container'));
 ```
-<a name="ScrollListener+action"></a>
+<a name="Actonscroll+action"></a>
 
-### scrollListener.action(action) ⇒ [<code>ScrollListener</code>](#ScrollListener)
+### actonscroll.action(action) ⇒ [<code>Actonscroll</code>](#Actonscroll)
 Sets an action to be performed when the scroll event is triggered.
 
-**Kind**: instance method of [<code>ScrollListener</code>](#ScrollListener)
+**Kind**: instance method of [<code>Actonscroll</code>](#Actonscroll)
 
 | Param | Type |
 | --- | --- |
@@ -123,14 +83,14 @@ Sets an action to be performed when the scroll event is triggered.
 
 **Example**
 ```js
-scrollListener.action(() => console.log('Scrooolling!'));
+actonscroll.action(() => console.log('Scrooolling!'));
 ```
-<a name="ScrollListener+conditions"></a>
+<a name="Actonscroll+conditions"></a>
 
-### scrollListener.conditions(conditions) ⇒ [<code>ScrollListener</code>](#ScrollListener)
+### actonscroll.conditions(conditions) ⇒ [<code>Actonscroll</code>](#Actonscroll)
 Sets a list of conditions to determine whether the configured action has to be performed or not.
 
-**Kind**: instance method of [<code>ScrollListener</code>](#ScrollListener)
+**Kind**: instance method of [<code>Actonscroll</code>](#Actonscroll)
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -141,18 +101,18 @@ Sets a list of conditions to determine whether the configured action has to be p
 
 **Example**
 ```js
-scrollListener.conditions({
+actonscroll.conditions({
   directions: ['up', 'left'],
   offset: 200,
   custom: () => true,
 });
 ```
-<a name="ScrollListener+throttling"></a>
+<a name="Actonscroll+throttling"></a>
 
-### scrollListener.throttling(throttling) ⇒ [<code>ScrollListener</code>](#ScrollListener)
+### actonscroll.throttling(throttling) ⇒ [<code>Actonscroll</code>](#Actonscroll)
 Sets a throttling time (ms) to the scroll event.
 
-**Kind**: instance method of [<code>ScrollListener</code>](#ScrollListener)
+**Kind**: instance method of [<code>Actonscroll</code>](#Actonscroll)
 
 | Param | Type |
 | --- | --- |
@@ -160,14 +120,14 @@ Sets a throttling time (ms) to the scroll event.
 
 **Example**
 ```js
-scrollListener.throttling(1000);
+actonscroll.throttling(1000);
 ```
-<a name="ScrollListener+once"></a>
+<a name="Actonscroll+once"></a>
 
-### scrollListener.once([once]) ⇒ [<code>ScrollListener</code>](#ScrollListener)
+### actonscroll.once([once]) ⇒ [<code>Actonscroll</code>](#Actonscroll)
 Determines whether the action should be performed once or not.
 
-**Kind**: instance method of [<code>ScrollListener</code>](#ScrollListener)
+**Kind**: instance method of [<code>Actonscroll</code>](#Actonscroll)
 
 | Param | Type | Default |
 | --- | --- | --- |
@@ -175,27 +135,27 @@ Determines whether the action should be performed once or not.
 
 **Example**
 ```js
-scrollListener.once();
+actonscroll.once();
 ```
-<a name="ScrollListener+start"></a>
+<a name="Actonscroll+start"></a>
 
-### scrollListener.start()
+### actonscroll.start()
 Executes the configured action after checking that all the conditions are satisfied.
 
-**Kind**: instance method of [<code>ScrollListener</code>](#ScrollListener)
+**Kind**: instance method of [<code>Actonscroll</code>](#Actonscroll)
 **Example**
 ```js
-scrollListener.start();
+actonscroll.start();
 ```
-<a name="ScrollListener+stop"></a>
+<a name="Actonscroll+stop"></a>
 
-### scrollListener.stop()
-Removes the listener from the configured container.
+### actonscroll.stop()
+Removes the actonscroll from the configured container.
 
-**Kind**: instance method of [<code>ScrollListener</code>](#ScrollListener)
+**Kind**: instance method of [<code>Actonscroll</code>](#Actonscroll)
 **Example**
 ```js
-scrollListener.stop();
+actonscroll.stop();
 ```
 
 # Demo
