@@ -1,7 +1,10 @@
 import offset from '../../src/conditions/offset';
-import getScrollPosition from '../../src/helpers/getScrollPosition';
 
-jest.mock('../../src/helpers/getScrollPosition');
+const scrollOffset = { x: 0, y: 100 };
+const listener = {
+  _container: document,
+  _scrollOffset: scrollOffset,
+};
 
 describe('offset', () => {
   it('should be a function', () => {
@@ -9,18 +12,19 @@ describe('offset', () => {
   });
 
   beforeEach(() => {
-    getScrollPosition.mockReturnValue({ x: 0, y: 100 });
+    window.scrollX = scrollOffset.x;
+    window.scrollY = scrollOffset.y;
   });
 
   describe('when the current scroll position is greater than the configured offset', () => {
     it('should return true', () => {
-      expect(offset.call({}, 50)).toBeTruthy();
+      expect(offset.call(listener, 50)).toBeTruthy();
     });
   });
 
   describe('when the current scroll position is greater than the configured offset', () => {
     it('should return false', () => {
-      expect(offset.call({}, 200)).toBeFalsy();
+      expect(offset.call(listener, 200)).toBeFalsy();
     });
   });
 });
