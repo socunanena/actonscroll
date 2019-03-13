@@ -20,10 +20,10 @@ actonscroll.create()
   .action(() => console.log('Scrooolling!'))
   .listen();
 
-// Revoke
+// Stop
 const listener = actonscroll.create();
 listener.listen();
-listener.revoke();
+listener.stop();
 ```
 
 # Documentation
@@ -80,7 +80,7 @@ Executes a predefined action when the scroll event is triggered.
     * [.throttling(throttling)](#ScrollListener+throttling) ⇒ [<code>ScrollListener</code>](#ScrollListener)
     * [.once([once])](#ScrollListener+once) ⇒ [<code>ScrollListener</code>](#ScrollListener)
     * [.listen()](#ScrollListener+listen)
-    * [.revoke()](#ScrollListener+revoke)
+    * [.stop()](#ScrollListener+stop)
 
 <a name="new_ScrollListener_new"></a>
 
@@ -187,15 +187,15 @@ Executes the configured action after checking that all the conditions are satisf
 ```js
 scrollListener.listen();
 ```
-<a name="ScrollListener+revoke"></a>
+<a name="ScrollListener+stop"></a>
 
-### scrollListener.revoke()
+### scrollListener.stop()
 Removes the listener from the configured container.
 
 **Kind**: instance method of [<code>ScrollListener</code>](#ScrollListener)
 **Example**
 ```js
-scrollListener.revoke();
+scrollListener.stop();
 ```
 
 # Demo

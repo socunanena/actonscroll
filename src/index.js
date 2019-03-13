@@ -178,9 +178,9 @@ class ScrollListener {
    * Removes the listener from the configured container.
    *
    * @example
-   * scrollListener.revoke();
+   * scrollListener.stop();
    */
-  revoke() {
+  stop() {
     this._stop();
   }
 

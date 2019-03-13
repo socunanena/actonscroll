@@ -22,7 +22,7 @@ describe('actonscroll', () => {
       expect(scrollListener.throttling).toBeInstanceOf(Function);
       expect(scrollListener.once).toBeInstanceOf(Function);
       expect(scrollListener.listen).toBeInstanceOf(Function);
-      expect(scrollListener.revoke).toBeInstanceOf(Function);
+      expect(scrollListener.stop).toBeInstanceOf(Function);
     });
 
     beforeEach(() => {
@@ -32,7 +32,7 @@ describe('actonscroll', () => {
 
     afterEach(() => {
       try {
-        eventListener.revoke();
+        eventListener.stop();
       } catch (e) {}
 
       action.mockClear();
@@ -238,13 +238,13 @@ describe('actonscroll', () => {
       });
     });
 
-    describe('actonscroll.create().revoke()', () => {
+    describe('actonscroll.create().stop()', () => {
       it('should stop listening to the scroll event', () => {
         eventListener
           .action(action)
           .listen();
         eventListener
-          .revoke();
+          .stop();
 
         document.dispatchEvent(scrollEvent);
 
