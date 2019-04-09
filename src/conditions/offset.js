@@ -1,12 +1,15 @@
 import getScrollPosition from '../helpers/getScrollPosition';
 
 /**
- * Returns true if the current scroll position is greater than the offset. False otherwise.
+ * Returns the current scroll position if it's greater than the offset. False otherwise.
  *
- * @param {number} offset
- * @returns {boolean}
+ * @param {Object} offset
+ * @param {number} offset.x
+ * @param {number} offset.y
+ * @returns {Object}
  */
-export default function offset(offset) {
-  const { y } = getScrollPosition(this._container);
-  return offset < y;
+export default function verifyOffset(offset) {
+  const { x, y } = getScrollPosition(this._container);
+
+  return (!offset.x || offset.x < x) && (!offset.y || offset.y < y) && { x, y };
 }

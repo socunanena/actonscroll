@@ -98,7 +98,7 @@ export default class Actonscroll {
     }
 
     // Offset
-    if (offset > 0) {
+    if (offset && (!offset.x || offset.x > 0) && (!offset.y || offset.y > 0)) {
       this._conditions.offset = () => this._verifyOffset(offset);
     }
 

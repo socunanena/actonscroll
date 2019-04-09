@@ -96,14 +96,14 @@ Sets a list of conditions to determine whether the configured action has to be p
 | --- | --- | --- |
 | conditions | <code>Object</code> |  |
 | conditions.directions | <code>Array.&lt;string&gt;</code> | Allowed values: <code>'all'</code>, <code>'vertical'</code>, <code>'horizontal'</code>, <code>'up'</code>, <code>'down'</code>, <code>'left'</code>, <code>'right'</code>. |
-| conditions.offset | <code>number</code> | In pixels. |
+| conditions.offset | <code>Object</code> | <code>{ x, y }</code> (In pixels). |
 | conditions.custom | <code>function</code> |  |
 
 **Example**
 ```js
 actonscroll.conditions({
   directions: ['up', 'left'],
-  offset: 200,
+  offset: { y: 200 },
   custom: () => true,
 });
 ```

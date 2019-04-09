@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const elementCO = document.querySelector('.config-condition-offset');
   const actonscrollCO = createActonscroll('example-condition-offset');
   actonscrollCO
-    .conditions({ offset: elementCO.value })
+    .conditions({ offset: { y: elementCO.value } })
     .start();
-  elementCO.onkeyup = event => actonscrollCO.conditions({ offset: event.srcElement.value });
+  elementCO.onkeyup = event => actonscrollCO.conditions({ offset: { y: event.srcElement.value } });
 
   const elementCC = document.querySelector('.config-condition-custom');
   const actonscrollCC = createActonscroll('example-condition-custom');
