@@ -24,6 +24,12 @@ function parse(directions) {
   return parsed;
 }
 
+/**
+ * Returns the direction to which the scroll is moving if it's in the configured directions. False otherwise.
+ *
+ * @param {string[]} directions
+ * @returns {string}
+ */
 export default function verifyDirections(directions) {
   const config = parse(directions);
 
