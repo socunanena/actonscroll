@@ -157,22 +157,3 @@ Removes the actonscroll from the configured container.
 ```js
 actonscroll.stop();
 ```
-
-# Demo
-
-In order to see this tool in action there's a basic demo with a few examples to demonstrate how it works. You can find it into the <code>/demo</code> folder. You just need to run the next commands:
-
-## On Mac
-```bash
-$ yarn && yarn run build && open demo/index.html
-```
-
-## On Linux
-```bash
-$ yarn && yarn run build && xdg-open demo/index.html
-```
-
-## On Windows
-```bash
-$ yarn && yarn run build && start demo/index.html
-```
