@@ -118,7 +118,7 @@ describe('actonscroll', () => {
       describe('and bad offset is passed', () => {
         it('should not check for the offset condition', () => {
           actonscroll
-            .conditions({ offset: -1 })
+            .conditions({ offset: { x: -1 } })
             .action(action)
             .start();
 
@@ -130,30 +130,30 @@ describe('actonscroll', () => {
 
       describe('and the scroll position is greater than the configured value', () => {
         it('should call the action with the success result as an argument', () => {
-          const offset = 20;
+          const offset = { y: 20 };
 
           actonscroll
             .conditions({ offset })
             .action(action)
             .start();
 
-          document.body.scrollTop = offset + 1;
+          document.body.scrollTop = offset.y + 1;
           document.dispatchEvent(scrollEvent);
 
-          expect(action).toHaveBeenCalledWith({ offset: true });
+          expect(action).toHaveBeenCalledWith({ offset: { x: 0, y: 21 } });
         });
       });
 
       describe('and the scroll position is less than the configured value', () => {
         it('should NOT trigger the configured action', () => {
-          const offset = 20;
+          const offset = { y: 20 };
 
           actonscroll
             .conditions({ offset })
             .action(action)
             .start();
 
-          document.body.scrollTop = offset - 1;
+          document.body.scrollTop = offset.y - 1;
           document.dispatchEvent(scrollEvent);
 
           expect(action).not.toHaveBeenCalled();

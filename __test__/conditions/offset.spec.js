@@ -16,15 +16,15 @@ describe('offset', () => {
     window.scrollY = scrollOffset.y;
   });
 
-  describe('when the current scroll position is greater than the configured offset', () => {
+  describe('when the current scroll position is lesser than the configured offset', () => {
     it('should return true', () => {
-      expect(offset.call(actonscroll, 50)).toBeTruthy();
+      expect(offset.call(actonscroll, { y: 50 })).toBeTruthy();
     });
   });
 
   describe('when the current scroll position is greater than the configured offset', () => {
     it('should return false', () => {
-      expect(offset.call(actonscroll, 200)).toBeFalsy();
+      expect(offset.call(actonscroll, { y: 200 })).toBeFalsy();
     });
   });
 });
