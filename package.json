@@ -1,6 +1,6 @@
 {
   "name": "actonscroll",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Tool to perform an action when a user scrolls in a web page.",
   "source": "src/index.js",
   "main": "dist/index.js",
