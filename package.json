@@ -2,13 +2,15 @@
   "name": "actonscroll",
   "version": "0.1.0",
   "description": "Tool to perform an action when a user scrolls in a web page.",
-  "main": "src/index.js",
+  "source": "src/index.js",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
   "author": "Natàlia <natalia.cavi@gmail.com>",
   "license": "Apache-2.0",
   "repository": "github:socunanena/actonscroll",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack --watch",
+    "build": "microbundle --name Actonscroll --external all",
     "test": "jest",
     "tdd": "jest --watch"
   },
@@ -16,8 +18,7 @@
     "@babel/preset-env": "^7.3.4",
     "babel-jest": "^24.1.0",
     "jest": "^24.1.0",
-    "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3"
+    "microbundle": "^0.11.0"
   },
   "dependencies": {
     "lodash.throttle": "^4.1.1"
