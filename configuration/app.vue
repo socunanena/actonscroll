@@ -15,7 +15,7 @@
     <section class="section">
       <div class="container">
         <div class="columns">
-          <div class="column">
+          <div class="column is-two-thirds">
             <!-- CONTAINER -->
             <div class="field is-horizontal">
               <div class="field-label is-normal">
@@ -25,6 +25,7 @@
                 <input class="input" type="text" placeholder=".container" v-model="container">
               </div>
             </div>
+            <!-- CONTAINER end -->
             <!-- ACTION -->
             <div class="field is-horizontal">
               <div class="field-label is-normal">
@@ -34,45 +35,47 @@
                 <textarea class="textarea" placeholder="console.log('Scrooolling!')" v-model="action"></textarea>
               </div>
             </div>
+            <!-- ACTION end -->
             <!-- CONDITIONS -->
             <div class="field is-horizontal">
               <div class="field-label is-normal">
                 <label class="label">Conditions</label>
               </div>
               <div class="field-body">
-                <div class="tile is-ancestor">
-                  <div class="tile is-vertical">
-                    <div class="tile is-parent">
-                      <div class="field tile is-child">
-                        <label class="label">Directions</label>
-                        <div class="select is-multiple">
-                          <select multiple size="3" v-model="conditions.directions">
-                            <option value="all">all</option>
-                            <option value="vertical">vertical</option>
-                            <option value="horizontal">horizontal</option>
-                            <option value="up">up</option>
-                            <option value="down">down</option>
-                            <option value="left">left</option>
-                            <option value="right">right</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="field tile is-child">
-                        <label class="label">Offset</label>
-                        <input class="input" type="number" placeholder="x" v-model="conditions.offset.x">
-                        <input class="input" type="number" placeholder="y" v-model="conditions.offset.y">
+                <div class="columns">
+                  <div class="column">
+                    <div class="field tile is-child">
+                      <label class="label">Directions</label>
+                      <div class="select is-multiple">
+                        <select multiple size="3" v-model="conditions.directions">
+                          <option value="all">all</option>
+                          <option value="vertical">vertical</option>
+                          <option value="horizontal">horizontal</option>
+                          <option value="up">up</option>
+                          <option value="down">down</option>
+                          <option value="left">left</option>
+                          <option value="right">right</option>
+                        </select>
                       </div>
                     </div>
-                    <div class="tile is-parent">
-                      <div class="field tile is-child">
-                        <label class="label">Custom</label>
-                        <textarea class="textarea" placeholder="return true" v-model="conditions.custom"></textarea>
-                      </div>
+                  </div>
+                  <div class="column">
+                    <div class="field tile is-child">
+                      <label class="label">Offset</label>
+                      <input class="input" type="number" placeholder="x" v-model="conditions.offset.x">
+                      <input class="input" type="number" placeholder="y" v-model="conditions.offset.y">
+                    </div>
+                  </div>
+                  <div class="column is-two-thirds">
+                    <div class="field tile is-child">
+                      <label class="label">Custom</label>
+                      <textarea class="textarea" placeholder="return true" v-model="conditions.custom"></textarea>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- CONDITIONS end -->
             <!-- THROTTLING -->
             <div class="field is-horizontal">
               <div class="field-label is-normal">
@@ -82,6 +85,7 @@
                 <input class="input" type="number" placeholder="200" v-model="throttling">
               </div>
             </div>
+            <!-- THROTTLING end -->
             <!-- ONCE -->
             <div class="field is-horizontal">
               <div class="field-label is-normal">
@@ -93,9 +97,10 @@
                 </label>
               </div>
             </div>
+            <!-- ONCE end -->
           </div>
-          <div class="column notification is-primary">
-            <pre><code>{{ code }}</code></pre>
+          <div class="column">
+            <pre>{{ code }}</pre>
           </div>
         </div>
       </div>
