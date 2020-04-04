@@ -1,14 +1,11 @@
 <template>
   <div>
-    <section class="hero is-primary">
+    <section class="hero is-primary is-bold">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
-            Primary title
+            Actonscroll code generator
           </h1>
-          <h2 class="subtitle">
-            Primary subtitle
-          </h2>
         </div>
       </div>
     </section>
