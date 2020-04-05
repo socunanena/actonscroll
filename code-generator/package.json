@@ -2,7 +2,8 @@
   "name": "actonscroll-configuration",
   "license": "MIT",
   "scripts": {
-    "start": "parcel index.html"
+    "dev": "parcel index.html",
+    "build": "parcel build index.html -d ../docs/"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
