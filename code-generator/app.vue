@@ -171,5 +171,5 @@ export default {
 </script>
 
 <style scoped>
-  @import './app.scss';
+  @import './node_modules/bulma/bulma';
 </style>
