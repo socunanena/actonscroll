@@ -3,7 +3,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "parcel index.html",
-    "build": "parcel build index.html -d ../docs/"
+    "prebuild": "rm -rf ../docs/",
+    "build": "parcel build index.html -d ../docs/ --public-url ."
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
