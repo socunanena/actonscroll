@@ -23,8 +23,8 @@
   "scripts": {
     "test": "jest",
     "tdd": "jest --watch --verbose",
-    "prebuild": "yarn run test",
-    "build": "microbundle --name Actonscroll --external all",
+    "prebuild": "yarn run test && rm -rf dist",
+    "build": "microbundle --name Actonscroll --external all --sourcemap false",
     "prerelease": "yarn run build",
     "release": "npm version -m \"New version: %s\"",
     "postrelease": "yarn run push && npm publish",
